@@ -11,6 +11,10 @@ frontend:
     build:
       commands:
         - echo "Build phase complete"
+    postBuild:
+      commands:
+        # - source venv/bin/activate # Use `venv/Scripts/Activate` for Windows
+        - python main.py
   artifacts:
     baseDirectory: /
     files:

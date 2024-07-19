@@ -1625,5 +1625,8 @@ def generate_random_password(length=8):
     password = ''.join(secrets.choice(characters) for i in range(length))
     return password
 
-if __name__=="__main__":
-    app.run(debug=True)
+# if __name__=="__main__":
+#     app.run(debug=True)
+
+if __name__ == "__main__":
+   app.run(host='0.0.0.0', port=5000)
