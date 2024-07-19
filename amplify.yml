@@ -10,7 +10,7 @@ frontend:
         - pip install -r requirements.txt
     build:
       commands:
-        - python main.py
+        - echo "Build phase complete"
   artifacts:
     baseDirectory: /
     files:
