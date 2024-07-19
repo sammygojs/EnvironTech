@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnviroOffset Tech</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+        body {
+            font-family: Poppins;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}');
+            background-cover: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .blur-bg {
+            background-color: rgba(244, 239, 239, 0.438);
+            /* Adjust background opacity as needed */
+            backdrop-filter: blur(10px);
+            /* Blur the content behind the div */
+            -webkit-backdrop-filter: blur(10px);
+            /* For Safari compatibility */
+        }
+
+        .input-field, .select-field, .label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%; /* Ensures full width inside the container */
+        }
+        .label {
+            text-decoration: underline; /* Adds an underline to each label */
+            /* font-weight: bold; Optionally makes the label text bold for further emphasis */
+        }
+        .input-field, .select-field {
+            border: 2px solid #4A90E2; /* Adds a blue border */
+            padding: 8px; /* Adds padding inside the inputs for better text alignment */
+            border-radius: 5px; /* Optional: rounds the corners of the input fields */
+        }
+    </style>
+</head>
+
+<body class="bg-cover bg-fixed bg-center">
+    {% include 'user/navbar.html' %}
+    <!-- How It Works Section -->
+    <section class="flex flex-col items-center justify-center text-white px-4 py-16 min-h-screen ">
+        <div class="container mx-auto text-center text-black rounded-2xl max-w-4xl p-8 blur-bg mt-5">
+            <h1 class="text-3xl font-bold">Comprehensive Carbon Footprint Calculator</h1>
+
+            <!-- Lighting -->
+            <label for="numLights" class="label">Number of Light Bulbs:</label>
+            <input type="number" id="numLights" class="input-field" placeholder="Enter number of light bulbs">
+            <label for="typeLights" class="label">Type of Light Bulbs:</label>
+            <select id="typeLights" class="select-field">
+                <option value="60">Incandescent (60W)</option>
+                <option value="14">CFL (14W)</option>
+                <option value="10">LED (10W)</option>
+            </select>
+            <label for="hoursLights" class="label">Daily Usage of Lights (hours):</label>
+            <input type="number" id="hoursLights" class="input-field" placeholder="Enter average hours per day">
+
+            <!-- Air Conditioning -->
+            <label for="hoursAC" class="label">Daily Usage of AC (hours):</label>
+            <input type="number" id="hoursAC" class="input-field" placeholder="Enter average hours per day">
+            <label for="typeAC" class="label">Power Rating of AC:</label>
+            <select id="typeAC" class="select-field">
+                <option value="2500">Standard AC (2500W)</option>
+                <option value="1500">Energy Efficient AC (1500W)</option>
+            </select>
+
+            <!-- Car Travel -->
+            <label for="carMiles" class="label">Car Travel (miles):</label>
+            <input type="number" id="carMiles" class="input-field" placeholder="Enter miles traveled">
+            <label for="carType" class="label">Type of Car:</label>
+            <select id="carType" class="select-field">
+                <option value="0.404">Sedan</option>
+                <option value="0.546">SUV</option>
+                <option value="0.349">Hybrid</option>
+                <option value="0.209">Electric</option>
+            </select>
+
+            <!-- Flights -->
+            <label for="flightMiles" class="label">Flight Distance (miles):</label>
+            <input type="number" id="flightMiles" class="input-field" placeholder="Enter flight miles">
+
+            <button onclick="calculateEmissions()" class="input-field border-0 bg-green-500 text-white">Calculate Emissions</button>
+
+            <div id="result" class="result" style="display:none;"></div>
+        </div>
+    </section>
+</body>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function calculateEmissions() {
+        const numLights = document.getElementById('numLights').value;
+        const typeLights = document.getElementById('typeLights').value;
+        const hoursLights = document.getElementById('hoursLights').value;
+        const hoursAC = document.getElementById('hoursAC').value;
+        const typeAC = document.getElementById('typeAC').value;
+        const carMiles = document.getElementById('carMiles').value;
+        const carType = document.getElementById('carType').value;
+        const flightMiles = document.getElementById('flightMiles').value;
+
+        // Constants
+        const electricityFactor = 0.233; // CO2 kg/kWh
+
+        // Calculations
+        const lightingEmissions = numLights * (typeLights / 1000) * hoursLights * 365 * electricityFactor; // kWh/year
+        const acEmissions = (typeAC / 1000) * hoursAC * 365 * electricityFactor; // kWh/year
+        const carEmissions = carMiles * parseFloat(carType); // carType holds the factor
+        const flightFactor = 0.115; // kg CO2 per mile
+        const flightEmissions = flightMiles * flightFactor;
+
+        const totalEmissions = lightingEmissions + acEmissions + carEmissions + flightFactor + flightEmissions
+
+        document.getElementById('result').innerHTML = `
+                <strong>Carbon Emissions:</strong>
+                <ul>
+                    <li>From Lighting: ${lightingEmissions.toFixed(2)} kg CO2 annually</li>
+                    <li>From Air Conditioning: ${acEmissions.toFixed(2)} kg CO2 annually</li>
+                    <li>From Car Travel: ${carEmissions.toFixed(2)} kg CO2</li>
+                    <li>From Flights: ${flightEmissions.toFixed(2)} kg CO2</li>
+                    <li>Total Emissions: ${totalEmissions.toFixed(2)} kg CO2</li>
+                </ul>
+                <strong>The Emission values are stored to your profile. Thank you for using our tool. </strong>
+            `;
+        document.getElementById('result').style.display = 'block';
+
+        sendEmissionToBackend(totalEmissions.toFixed(2));
+    }
+
+    function sendEmissionToBackend(emissionValue) {
+        // Make an AJAX request to your backend endpoint
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/user/carbon_footprint", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle successful response if needed
+                console.log("Emission value sent to backend successfully.");
+            }
+        };
+        xhr.send(JSON.stringify({emissionValue: emissionValue}));
+    }
+</script>
+
+</html>

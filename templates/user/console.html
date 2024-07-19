@@ -1,0 +1,267 @@
+<div style="font-family: 'Poppins';" class="flex-auto">
+
+  <div class="rounded">
+    <!-- <div class="text-3xl font-semibold p-4 px-1 flex justify-center bg-gray-100 w-1/2 mx-auto rounded-2xl">Products Catalogue</div> -->
+    <div class="w-full p-2">
+      {% if error_message %}
+      <h1 class="text-white w-fit mx-auto font-semibold text-center bg-red-500 rounded-xl py-2 px-2">
+        {{error_message}}, please try again
+      </h1>
+      {% endif %}
+      {% if success_message %}
+      <h1 class="text-white w-fit mx-auto font-semibold text-center bg-green-500 rounded-xl py-2 px-2">
+        {{success_message}}
+      </h1>
+      {% endif %}
+      <div class="w-1/2 p-4 flex">
+        <form action="{{ url_for('user_home') }}" method="GET">
+          <div class="mb-2">
+            <select onchange="window.location.href=this.value" id="sort_by"
+              class="font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <option class="font-semibold" value="{{ url_for('user_home', sort_by='asc') }}" {% if sort_by=='asc'
+                %}selected{% endif %}>Sort Ascending</option>
+              <option class="font-semibold" value="{{ url_for('user_home', sort_by='desc') }}" {% if sort_by=='desc'
+                %}selected{% endif %}>Sort Descending</option>
+            </select>
+          </div>
+        </form>
+        
+        &nbsp&nbsp&nbsp
+        
+        <div class="flex gap-4">
+          <div class="relative">
+            <details
+              class="group [&_summary::-webkit-details-marker]:hidden font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <summary class="">
+                <span class="text-sm font-medium"> Filter price </span>
+              </summary>
+
+              <div class="z-50 group-open:absolute group-open:start-0 group-open:top-auto group-open:mt-2">
+                <div class="w-96 rounded border border-gray-200 bg-white">
+                  <header class="flex items-center justify-between p-4">
+                    <span class="text-sm text-gray-700"> The highest price is $600 </span>
+
+                    <button type="button" onclick="filter_price()"
+                      class="text-sm text-gray-900 underline underline-offset-4">
+                      Apply
+                    </button>
+                    <button type="button" onclick="reset_filter_price()"
+                      class="text-sm text-gray-900 underline underline-offset-4">
+                      Reset
+                    </button>
+                  </header>
+
+                  <div class="border-t border-gray-200 p-4">
+                    <div class="flex justify-between gap-4">
+                      <label for="FilterPriceFrom" class="flex items-center gap-2">
+                        <span class="text-sm text-gray-600">$</span>
+
+                        <input type="number" id="FilterPriceFrom" placeholder="From"
+                          class="w-full rounded-md border-gray-200 shadow-sm sm:text-sm text-black" />
+                      </label>
+
+                      <label for="FilterPriceTo" class="flex items-center gap-2">
+                        <span class="text-sm text-gray-600">$</span>
+
+                        <input type="number" id="FilterPriceTo" placeholder="To"
+                          class="w-full rounded-md border-gray-200 shadow-sm sm:text-sm text-black" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+
+
+
+        &nbsp&nbsp&nbsp
+        <div class="flex gap-4">
+          <div class="relative">
+            <details
+              class="group [&_summary::-webkit-details-marker]:hidden font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <summary class="">
+                <span class="text-sm font-medium"> Filter size </span>
+              </summary>
+
+              <div class="z-50 group-open:absolute group-open:start-0 group-open:top-auto group-open:mt-2">
+                <div class="w-96 rounded border border-gray-200 bg-white">
+                  <header class="flex items-center justify-between p-4">
+                    <span class="text-sm text-gray-700"> The highest size is 5000 kWh/day </span>
+
+                    <button type="button" onclick="filter_size_capacity()"
+                      class="text-sm text-gray-900 underline underline-offset-4">
+                      Apply
+                    </button>
+                    <button type="button" onclick="reset_filter_size_capacity()"
+                      class="text-sm text-gray-900 underline underline-offset-4">
+                      Reset
+                    </button>
+                  </header>
+
+                  <div class="border-t border-gray-200 p-4">
+                    <div class="flex justify-between gap-4">
+                      <label for="FilterPriceFrom" class="flex items-center gap-2">
+
+
+                        <input type="number" id="FilterSizeCapFrom" placeholder="From"
+                          class="w-full rounded-md border-gray-200 shadow-sm sm:text-sm text-black" />
+                        <span class="text-sm text-gray-600">kWh/day</span>
+                      </label>
+
+                      <label for="FilterPriceTo" class="flex items-center gap-2">
+
+
+                        <input type="number" id="FilterSizeCapto" placeholder="To"
+                          class="w-full rounded-md border-gray-200 shadow-sm sm:text-sm text-black" />
+                        <span class="text-sm text-gray-600">kWh/day</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+        </div>
+
+      </div>
+      <form action="/user/compare" method="post" id="productForm">
+        <button
+          class="group [&_summary::-webkit-details-marker]:hidden font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
+          type="submit">Compare Selected Products</button>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
+
+          {% for product in products %}
+          <!-- Product Card (Repeat as needed) -->
+          <div class="bg-white p-6 rounded-2xl shadow-2xl items-center">
+            <input class="mr-3" type="checkbox" name="productCheckbox" value="{{product.id}}">
+            <h3 class="text-xl font-bold mb-2 border-b-4 border-gray-300 pb-1">Solar Roofs in {{ product.country }}</h3>
+            
+            <p class="mt-4 font-bold">£{{product.price}}/roof</p>
+
+            <p class="mt-4 font-bold">
+              <svg class="h-8 w-8 text-slate-500 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              {{product.population}} M
+            </p>
+            <p class="mt-4 font-bold ">
+              <svg class="h-8 w-8 text-slate-500 inline " viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              {{product.energy_production}} kWh / day
+            </p>
+            <p class="mt-4 font-bold">
+              <svg class="h-8 w-8 text-slate-500 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                <polyline points="17 6 23 6 23 12" />
+              </svg>
+              {{product.impact}} Impact
+            </p>
+            <a href="/user/product/{{product.id}}"
+              class="block mt-4 bg-blue-700 text-white px-4 py-2 rounded-full text-center hover:bg-green-600 transition">Explore</a>
+          </div>
+          <!-- End Product Card -->
+          {% endfor %}
+
+        </div>
+
+
+    </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function filter_price() {
+    console.log("Filter price from £" + document.getElementById("FilterPriceFrom").value);
+    console.log("to £" + document.getElementById("FilterPriceTo").value);
+  }
+  function reset_filter_price() {
+    document.getElementById("FilterPriceFrom").value = "";
+    document.getElementById("FilterPriceTo").value = "";
+  }
+  function filter_size() {
+    console.log("Filter size from " + document.getElementById("FilterSizeFrom").value + "kWh/day");
+    console.log("to " + document.getElementById("FilterSizeTo").value + "kWh/day");
+  }
+  function reset_filter_size() {
+    document.getElementById("FilterSizeFrom").value = "";
+    document.getElementById("FilterSizeTo").value = "";
+  }
+</script>
+<script>
+  document.getElementById("productForm").addEventListener("submit", function (event) {
+    const selectedCheckboxes = document.querySelectorAll('input[name="productCheckbox"]:checked');
+    if (selectedCheckboxes.length < 2) {
+      event.preventDefault(); // Prevent form submission
+      alert("Please select at least two products.");
+    }
+  });
+</script>
+<script>
+  const checkboxes = document.querySelectorAll('input[name="productCheckbox"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', limitSelection);
+  });
+
+  function limitSelection() {
+    let checkedCount = 0;
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkedCount++;
+      }
+    });
+
+    if (checkedCount >= 2) {
+      checkboxes.forEach((checkbox) => {
+        if (!checkbox.checked) {
+          checkbox.disabled = true;
+        }
+      });
+    } else {
+      checkboxes.forEach((checkbox) => {
+        checkbox.disabled = false;
+      });
+    }
+  }
+
+  function filter_price() {
+    var min_price = document.getElementById('FilterPriceFrom').value;
+    var max_price = document.getElementById('FilterPriceTo').value;
+    window.location.href = '/filter_products?min_price=' + min_price + '&max_price=' + max_price;
+  }
+
+  function reset_filter_price() {
+    document.getElementById('FilterPriceFrom').value = '';
+    document.getElementById('FilterPriceTo').value = '';
+    window.location.href = '/user/home';
+  }
+
+  function filter_size_capacity() {
+    var min_price = document.getElementById('FilterSizeCapFrom').value;
+    var max_price = document.getElementById('FilterSizeCapto').value;
+    window.location.href = '/filter_capacity?min_cap=' + min_price + '&max_cap=' + max_price;
+  }
+
+  function reset_filter_size_capacity()  {
+    document.getElementById('FilterSizeCapFrom').value = '';
+    document.getElementById('FilterSizeCapto').value = '';
+    window.location.href = '/user/home';
+  }
+
+</script>

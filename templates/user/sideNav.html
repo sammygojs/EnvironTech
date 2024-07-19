@@ -1,0 +1,106 @@
+<!--sidenav -->
+<div class="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform shadow-xl">
+    <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
+        <h1 class="font-bold text-xl px-2 rounded-md">EnvironOffset Tech</h1>
+    </a>
+    <ul class="mt-4">
+        <!-- <span class="text-gray-400 font-bold">User</span> -->
+        <li class="mb-1 group">
+            <a href="/user/home" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <i class="ri-home-2-line mr-3 text-lg"></i>
+                <span class="text-sm">Home</span>
+            </a>
+            <a href="/user/upload_foot" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <!-- <i class="ri-home-2-line mr-3 text-lg"></i> -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 text-lg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M16 2a2 2 0 1 1-2 2a2 2 0 0 1 2-2m-3.96 1a1.5 1.5 0 1 1-1.5 1.5a1.5 1.5 0 0 1 1.5-1.5M9.09 4.5a1 1 0 1 1-1 1a1 1 0 0 1 1-1M7.04 6a1 1 0 1 1-1 1a1 1 0 0 1 1-1m7.49 6A2.5 2.5 0 0 0 17 9.24A2.6 2.6 0 0 0 14.39 7h-2.48a6 6 0 0 0-5.79 4.4a2 2 0 0 0 .11 1.4a6.8 6.8 0 0 1 .68 2.96a6.89 6.89 0 0 1-.69 2.79a1.92 1.92 0 0 0 .08 1.76a3.62 3.62 0 0 0 3.89 1.6a3.5 3.5 0 0 0 2.17-5.28a2.82 2.82 0 0 1-.45-1.63s-.23-3 2.62-3"/></svg>
+                <span class="text-sm">Calculate Footprint</span>
+            </a>
+        </li>
+        <!-- <a href="/user/countryComparisonPage" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+            <i class="ri-home-2-line mr-3 text-lg"></i>
+            <span class="text-sm">Compare country data</span>
+        </a> -->
+        <li class="mb-1 group">
+            <a href="/user/statistics" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <!-- <i class='bx bx-list-ul mr-3 text-lg'></i>   -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 text-lg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19.88 18.47c.44-.7.7-1.51.7-2.39c0-2.49-2.01-4.5-4.5-4.5s-4.5 2.01-4.5 4.5s2.01 4.5 4.49 4.5c.88 0 1.7-.26 2.39-.7L21.58 23L23 21.58zm-3.8.11a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5m-.36-8.5c-.74.02-1.45.18-2.1.45l-.55-.83l-3.8 6.18l-3.01-3.52l-3.63 5.81L1 17l5-8l3 3.5L13 6zm2.59.5c-.64-.28-1.33-.45-2.05-.49L21.38 2L23 3.18z"/></svg>              
+                <span class="text-sm">User Statistics</span>
+            </a>
+        </li>
+        <li class="mb-1 group">
+            <a href="/user/stats" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <!-- <i class='bx bx-list-ul mr-3 text-lg'></i>   -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 text-lg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19.88 18.47c.44-.7.7-1.51.7-2.39c0-2.49-2.01-4.5-4.5-4.5s-4.5 2.01-4.5 4.5s2.01 4.5 4.49 4.5c.88 0 1.7-.26 2.39-.7L21.58 23L23 21.58zm-3.8.11a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5m-.36-8.5c-.74.02-1.45.18-2.1.45l-.55-.83l-3.8 6.18l-3.01-3.52l-3.63 5.81L1 17l5-8l3 3.5L13 6zm2.59.5c-.64-.28-1.33-.45-2.05-.49L21.38 2L23 3.18z"/></svg>              
+                <span class="text-sm">User Statistics 2</span>
+            </a>
+        </li>
+        <li class="mb-1 group">
+            <a href="/user/orders" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <!-- <i class='bx bx-list-ul mr-3 text-lg'></i>   -->
+                <svg class="mr-3 text-lg"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M16 5v4a1 1 0 0 0 1 1h4" />  <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2v-7l-5 -5h-11a2 2 0 0 0 -2 2z" /></svg>           
+                <span class="text-sm">My orders</span>
+            </a>
+        </li>
+        <li class="mb-1 group">
+            <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                <i class='bx bx-user mr-3 text-lg'></i>                
+                <span class="text-sm">User Account</span>
+                <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+            </a>
+            <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                <!-- <li class="mb-4">
+                    <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">All Users</a>
+                </li>  -->
+                <!-- <li class="mb-4">
+                    <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Other field</a>
+                </li> -->
+                <li class="mb-4">
+                    <a href="/user/update_profile" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Update Profile</a>
+                </li>
+                <li class="mb-4">
+                    <a href="/user/forgotPassword" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Forgot Password</a>
+                </li>
+            </ul>
+        </li>
+        
+        <!-- <span class="text-gray-400 font-bold">BLOG</span>
+        <li class="mb-1 group">
+            <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                <i class='bx bxl-blogger mr-3 text-lg' ></i>                 
+                <span class="text-sm">Post</span>
+                <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+            </a>
+            <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                <li class="mb-4">
+                    <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">All</a>
+                </li> 
+                <li class="mb-4">
+                    <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Categories</a>
+                </li> 
+            </ul>
+        </li>
+        <li class="mb-1 group">
+            <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <i class='bx bx-archive mr-3 text-lg'></i>
+                <span class="text-sm">Archive</span>
+            </a>
+        </li>
+        <span class="text-gray-400 font-bold">PERSONAL</span>
+        <li class="mb-1 group">
+            <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <i class='bx bx-bell mr-3 text-lg' ></i>
+                <span class="text-sm">Notifications</span>
+                <span class=" md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-600 bg-red-200 rounded-full">5</span>
+            </a>
+        </li>
+        <li class="mb-1 group">
+            <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <i class='bx bx-envelope mr-3 text-lg' ></i>
+                <span class="text-sm">Messages</span>
+                <span class=" md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-green-600 bg-green-200 rounded-full">2 New</span>
+            </a>
+        </li> -->
+    </ul>
+</div>
+<div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
+<!-- end sidenav -->

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+  </head>
+  <body>
+    {% for product in products %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>name</td>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <td>description</td>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <td>country</td>
+                <td>{{ product.country }}</td>
+            </tr>
+            <tr>
+                <td>population</td>
+                <td>{{ product.population }}</td>
+            </tr>
+            <tr>
+                <td>impact</td>
+                <td>{{ product.impact }}</td>
+            </tr>
+            <tr>
+                <td>energy production</td>
+                <td>{{ product.energy_production }}</td>
+            </tr>
+            <tr>
+                <td>time to recover expense</td>
+                <td>{{ product.time_to_recover_expense }}</td>
+            </tr>
+            <tr>
+                <td>carbon offset per year</td>
+                <td>{{ product.carbon_offset_per_year }}</td>
+            </tr>
+            <tr>
+                <td>electricity grid network km </td>
+                <td>{{ product.electricity_grid_network_km }}</td>
+            </tr>
+            <tr>
+                <td>Amount:</td><td id="{{ product.id }}">0</td>
+                <td>
+                    <button onclick="btnAdd('{{ product.id }}')">Add</button>
+                    <button onclick="btnSub('{{ product.id }}')">Substract</button>
+                    <button onclick="btnBuy('{{ product.id }}')">Buy</button>
+                </td>
+	            <td><div id="btn {{ product.id }}"></div></td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+  </body>
+  <script src="https://www.paypal.com/sdk/js?client-id={{client_id}}&currency=GBP"></script>
+  <script>
+    function btnAdd(id) {
+        var td = document.getElementById(id);
+        var num = parseInt(td.innerText) + 1;
+        td.innerText = num.toString();
+    }
+    function btnSub(id) {
+        var td = document.getElementById(id);
+        var num = parseInt(td.innerText) - 1;
+        if (num < 0) return;
+        td.innerText = num.toString();
+    }
+    function btnBuy(id) {
+        var num = parseInt(document.getElementById(id).innerText);
+        if (num == 0) {
+            alert("Amount is 0.");
+            return;
+        }
+        // Create order
+        fetch("/user/order", {
+			method: "POST",
+			headers: {'Content-Type': 'application/json;charset=utf-8;'},
+			body: JSON.stringify({ "productID": id, "quantity": num})
+        })
+        .then((response) => { window.open(response.url, "_blank"); });
+    }
+  </script>
+</html>

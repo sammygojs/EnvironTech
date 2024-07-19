@@ -1,0 +1,76 @@
+[
+    {
+        "name": "Spain",
+        "grid carbon intensity (gCO2eq/kWh)": 131,
+        "cost of solar (US$/kWp)": 545,
+        "potential solar generation (kWh per kWp per year)": 1655,
+        "population (millions)": 47.4,
+        "households without access to electricity (%)": 0,
+        "flag_url": ""
+    },
+    {
+        "name": "Nigeria",
+        "grid carbon intensity (gCO2eq/kWh)": 440,
+        "cost of solar (US$/kWp)": 313,
+        "potential solar generation (kWh per kWp per year)": 1554,
+        "population (millions)": 227.5,
+        "households without access to electricity (%)": 37.8,
+        "flag_url": ""
+    },
+    {
+        "name": "India",
+        "grid carbon intensity (gCO2eq/kWh)": 632,
+        "cost of solar (US$/kWp)": 845,
+        "potential solar generation (kWh per kWp per year)": 1585,
+        "population (millions)": 1440,
+        "households without access to electricity (%)": 3.3,
+        "flag_url": ""
+    },
+    {
+        "name": "Egypt",
+        "grid carbon intensity (gCO2eq/kWh)": 475,
+        "cost of solar (US$/kWp)": 1775,
+        "potential solar generation (kWh per kWp per year)": 1986,
+        "population (millions)": 114.4,
+        "households without access to electricity (%)": 0,
+        "extra information": "there are currently frequent blackouts happening in the country",
+        "flag_url": ""
+    },
+    {
+        "name": "South Africa",
+        "grid carbon intensity (gCO2eq/kWh)": 866,
+        "cost of solar (US$/kWp)": 1132,
+        "potential solar generation (kWh per kWp per year)": 1869,
+        "population (millions)": 59.4,
+        "households without access to electricity (%)": 10.4,
+        "extra information": "an estimated 43% of South African households are too poor to meet their basic energy needs",
+        "flag_url": ""
+    },
+    {
+        "name": "Mexico",
+        "grid carbon intensity (gCO2eq/kWh)": 431,
+        "cost of solar (US$/kWp)": 1694,
+        "potential solar generation (kWh per kWp per year)": 1812,
+        "population (millions)": 129.4,
+        "households without access to electricity (%)": 0.2,
+        "flag_url": ""
+    },
+    {
+        "name": "Brazil",
+        "grid carbon intensity (gCO2eq/kWh)": 98,
+        "cost of solar (US$/kWp)": 4100,
+        "potential solar generation (kWh per kWp per year)": 1672,
+        "population (millions)": 214.3,
+        "households without access to electricity (%)": 0.3,
+        "flag_url": ""
+    },
+    {
+        "name": "Unites States of America",
+        "grid carbon intensity (gCO2eq/kWh)": 376,
+        "cost of solar (US$/kWp)": 2117,
+        "potential solar generation (kWh per kWp per year)": 1719,
+        "population (millions)": 341.3,
+        "households without access to electricity (%)": 0,
+        "flag_url": ""
+    }
+]

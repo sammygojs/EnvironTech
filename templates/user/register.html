@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnviroOffset Tech</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+        body {
+            font-family: Poppins;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .blur-bg {
+            background-color: rgba(244, 239, 239, 0.438);
+            /* Adjust background opacity as needed */
+            backdrop-filter: blur(10px);
+            /* Blur the content behind the div */
+            -webkit-backdrop-filter: blur(10px);
+            /* For Safari compatibility */
+        }
+    </style>
+
+</head>
+
+<body class="bg-cover bg-fixed bg-center"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">
+    ">
+    {% include 'header.html' %}
+    <!-- How It Works Section -->
+    <section class="text-white px-16 py-16 h-screen">
+      <div
+      class="w-full px-6 py-1 m-4 mx-auto bg-white rounded-2xl shadow-md lg:max-w-xl"
+    >
+      <h1 class="text-3xl text-gray-600 font-bold text-center my-4">
+        Register at EnvironOffset Tech
+      </h1>
+      {% if error_message %}
+      <h1
+        class="text-white w-fit mx-auto font-semibold text-center bg-red-500 rounded-xl py-2 px-2"
+      >
+        {{error_message}}, please try again
+      </h1>
+      {% endif %} {% if success_message %}
+      <h1
+        class="text-white w-fit mx-auto font-semibold text-center bg-green-500 rounded-xl py-2 px-2"
+      >
+        {{success_message}}
+      </h1>
+      {% endif %}
+      <form action="/user/register" method="post">
+        <label class="label">
+          <span class="text-base text-gray-600 font-semibold label-text">Name</span>
+        </label>
+        <div class="flex items-center space-x-4">
+          <input
+            type="text"
+            placeholder="First Name"
+            name="fname"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="lname"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="text-base text-gray-600 label-text font-semibold">Email</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Email Address"
+            name="email"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="text-base text-gray-600 label-text font-semibold">Country</span>
+          </label>
+          <select class="bg-gray-200 appearance-none border-2 border-gray-200 rounded text-gray-700 w-full py-2 px-4  leading-tight focus:outline-none focus:bg-white focus:border-yellow-500" name="country">
+            <option class="text-base label-text text-gray-700" value="UK">
+              United Kingdom
+            </option>
+            <option class="text-base label-text text-gray-700" value="US">
+              United States
+            </option>
+            <option class="text-base label-text text-gray-700" value="CA">Canada</option>
+            <option class="text-base label-text text-gray-700" value="AU">Australia</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">
+            <span class="text-base text-gray-600 label-text font-semibold">Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+          />
+        </div>
+        <div>
+          <label class="label">
+            <span class="text-base text-gray-600 label-text font-semibold">Confirm Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            name="confirm_password"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+          />
+        </div>
+        <div class="space-y-2">
+          <button class="btn-block mt-4 bg-yellow-500 text-white font-bold py-2 rounded-xl hover:bg-black hover:text-white ">Sign Up</button>
+        </div>
+        <div class="text-center py-3">
+          <span class="text-black"
+            >Already have an account ?
+            <a
+              href="/"
+              class="text-blue-600 hover:text-blue-800 hover:underline"
+              >Login</a
+            ></span
+          >
+        </div>
+        <div class="text-center py-3">
+          <span class="text-black"
+            >Register as a Staff ?
+            <a
+              href="/staff/register"
+              class="text-blue-600 hover:text-blue-800 hover:underline"
+              >Register</a
+            ></span
+          >
+        </div>
+      </form>
+    </div>
+    </section>
+</body>
+
+</html>

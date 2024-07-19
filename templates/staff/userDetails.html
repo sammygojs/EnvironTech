@@ -1,0 +1,53 @@
+<!-- user_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff | User profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Additional custom styles can be added here */
+    </style>
+</head>
+
+<body class="text-gray-800 font-inter bg-cover bg-fixed bg-center"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">
+    {% include 'staff/navbar.html' %}
+
+    <main class="md:mt-16 min-h-screen transition-all main">
+
+        
+        <div class=" p-6">
+            <div class="container mx-auto py-10">
+                <h1 class="text-2xl font-semibold mb-5 text-center text-white">User Details</h1>
+                <div id="userDetails" class="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+                    <div class="bg-white p-5 shadow-md rounded">
+                        <h2 class="text-lg font-semibold mb-3">{{ user.fname }} {{ user.lname }}</h2>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                        <p><strong>Country:</strong> {{ user.country }}</p>
+                        <p><strong>Total Contribution:</strong> ${{ user.total_contribution }}</p>
+                        <p><strong>Total Carbon Offset:</strong> {{ user.total_carbon_offset }} tons</p>
+                        <p><strong>Carbon Footprint:</strong> {{ user.carbon_footprint }} tons</p>
+                        {% if user.offset_under_neutral %}
+                        <p><strong>Offset Under Neutral:</strong> {{ user.offset_under_neutral }} tons</p>
+                        {% endif %}
+                    </div>
+                    <!-- Add chart or additional content here if needed -->
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script src=" https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+
+</html>

@@ -1,0 +1,99 @@
+body.bg-gray-200 {
+  background-image: url('path-to-your-image.jpg'); /* The path to your background image */
+  background-repeat: no-repeat;
+  background-size: 1500px 1000px; /* Or any other fixed size */
+  /* background-position: center center; Adjust as needed to center the image */
+  /* Or 'contain' depending on your needs */
+}
+.input-group {
+  margin-bottom: 16px; /* Or adjust according to your design requirements */
+}
+
+
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+  margin: 5rem auto 0;
+}
+
+.div-container {
+  width: 100%;
+  background-color: #91ccf9ea;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+
+  max-width: 28rem;
+}
+
+.div-form {
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.h1 {
+  
+  text-align: center;
+  font-size: 2.75rem;
+  font-weight: bold;
+  line-height: 1.75rem;
+  color: #000000;
+  margin-bottom: 45px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size:larger;
+  font-weight:bold;
+  color: #1a202c;
+}
+
+.input {
+  background-color: #f5f5f5;
+  border: 1px solid #d2d6dc;
+  color: #1a202c;
+  font-size: 0.975rem;
+  border-radius: 0.8rem;
+  padding: 0.625rem;
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+  color: #ffffff; /* Text color */
+  border-color: #5e89df; /* Border color */
+  background-color: #dd7d41e3; /* Background color */
+  padding: 0.625rem 1.25rem;
+  font-size: 25px;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+  margin-top: 15px;
+}
+
+.button:hover {
+  background-color: #1d4ed8; /* Background color on hover */
+  color: #ffffff; /* Text color on hover */
+}
+
+/* Style for guest login button */
+.guest-button {
+  background: none; /* No background */
+  border: none; /* No border */
+  color: #d73f0ce8; /* Text color, adjust based on your design */
+  text-decoration: underline; /* Add underline */
+  cursor: pointer; /* Show pointer cursor on hover */
+  padding: 10px; /* Padding, adjust as needed */
+  margin-top: 10px; /* Margin from the element above */
+  font-size: 2rem; /* Font size, adjust as needed */
+  position: absolute;
+  right: 2em;
+  top: 2em; /* Adjust the top as needed for vertical placement */
+  /* Other styles remain the same */
+}
+

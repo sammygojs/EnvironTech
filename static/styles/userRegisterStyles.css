@@ -1,0 +1,9 @@
+h1 {
+    color: navy;
+    margin-left: 20px;
+  }
+
+p, input {
+  font-size: 16pt;
+  font-family: "Arial";
+}

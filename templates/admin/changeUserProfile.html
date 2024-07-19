@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>User Home</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}"> -->
+    <style>
+        .h1 {
+
+            text-align: center;
+            font-size: 2.75rem;
+            font-weight: bold;
+            line-height: 1.75rem;
+            color: #000000;
+            margin-bottom: 45px;
+        }
+
+        .label {
+            padding: 0.625rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: larger;
+            font-weight: bold;
+            color: #1a202c;
+            text-align: center;
+        }
+
+        .input {
+            background-color: #f5f5f5;
+            border: 1px solid #d2d6dc;
+            color: #1a202c;
+            text-align: center;
+            font-size: 0.975rem;
+            border-radius: 0.8rem;
+            padding: 0.625rem;
+            width: 35%;
+        }
+
+        .button {
+            width: 50%;
+            color: #1488ed;
+            /* Text color */
+            border-color: #5e89df;
+            /* Border color */
+            background-color: #dd7d41e3;
+            /* Background color */
+            padding: 0.625rem 1.25rem;
+            font-size: 25px;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s, color 0.3s;
+            /* Smooth transition effect */
+            margin-top: 15px;
+        }
+
+        .input-group {
+            text-align: center;
+            margin-bottom: 16px;
+            /* Or adjust according to your design requirements */
+        }
+
+        .button:hover {
+            text-align: center;
+            background-color: #1d4ed8;
+            /* Background color on hover */
+            color: #ffffff;
+            /* Text color on hover */
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="text-gray-800 font-inter bg-cover bg-fixed bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">">
+
+    {% include 'admin/navbar.html' %}
+
+    <main class="">
+
+        
+
+        <section class="">
+            <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+
+                <div
+                    class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        {% if success_message %}
+                        <h1
+                            class="text-white w-fit mx-auto font-semibold text-center bg-green-500 rounded-xl py-2 px-2">
+                            {{success_message}}
+                        </h1>
+                        {% endif %}
+                        <h1
+                            class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                            Update profile
+                        </h1>
+                        <form class="space-y-4 md:space-y-6" action="/admin/changeUserProfile/{{user.id}}" method="post">
+                            <div>
+                                <label for="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Your
+                                    email</label>
+                                <input type="email" name="email" id="email"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                    value="{{user.email}}" placeholder="name@company.com" required="" readonly>
+                            </div>
+                            <div>
+                                <label for="firstname"
+                                    class="block mb-2 text-sm font-medium text-gray-900 ">Firstname</label>
+                                <input type="text" name="firstname" id="firstname"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                    value="{{user.fname}}" placeholder="John" required="">
+                            </div>
+
+                            <div>
+                                <label for="lastname"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Lastname</label>
+                                <input type="text" name="lastname" id="lastname"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                    value="{{user.lname}}" placeholder="Doe" required="">
+                            </div>
+
+                            <div>
+                                <label for="lastname"
+                                    class="block mb-2 text-sm font-medium text-gray-900 ">Country</label>
+                                <select
+                                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded text-gray-700 w-full py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+                                    name="country" required="">
+                                    <option class="text-base label-text text-gray-700" value="" disabled selected>
+                                        Selected Country : {{user.country}}</option>
+                                    <option class="text-base label-text text-gray-700" value="UK">United Kingdom
+                                    </option>
+                                    <option class="text-base label-text text-gray-700" value="US">United States</option>
+                                    <option class="text-base label-text text-gray-700" value="CA">Canada</option>
+                                    <option class="text-base label-text text-gray-700" value="AU">Australia</option>
+                                </select>
+                            </div>
+                            <button type="submit"
+                                class="w-full text-blue bg-yellow-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update
+                                profile</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+       
+        // start: Popper
+        const popperInstance = {}
+        document.querySelectorAll('.dropdown').forEach(function (item, index) {
+            const popperId = 'popper-' + index
+            const toggle = item.querySelector('.dropdown-toggle')
+            const menu = item.querySelector('.dropdown-menu')
+            menu.dataset.popperId = popperId
+            popperInstance[popperId] = Popper.createPopper(toggle, menu, {
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 8],
+                        },
+                    },
+                    {
+                        name: 'preventOverflow',
+                        options: {
+                            padding: 24,
+                        },
+                    },
+                ],
+                placement: 'bottom-end'
+            });
+        })
+        document.addEventListener('click', function (e) {
+            const toggle = e.target.closest('.dropdown-toggle')
+            const menu = e.target.closest('.dropdown-menu')
+            if (toggle) {
+                const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu')
+                const popperId = menuEl.dataset.popperId
+                if (menuEl.classList.contains('hidden')) {
+                    hideDropdown()
+                    menuEl.classList.remove('hidden')
+                    showPopper(popperId)
+                } else {
+                    menuEl.classList.add('hidden')
+                    hidePopper(popperId)
+                }
+            } else if (!menu) {
+                hideDropdown()
+            }
+        })
+
+        function hideDropdown() {
+            document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+                item.classList.add('hidden')
+            })
+        }
+        function showPopper(popperId) {
+            popperInstance[popperId].setOptions(function (options) {
+                return {
+                    ...options,
+                    modifiers: [
+                        ...options.modifiers,
+                        { name: 'eventListeners', enabled: true },
+                    ],
+                }
+            });
+            popperInstance[popperId].update();
+        }
+        function hidePopper(popperId) {
+            popperInstance[popperId].setOptions(function (options) {
+                return {
+                    ...options,
+                    modifiers: [
+                        ...options.modifiers,
+                        { name: 'eventListeners', enabled: false },
+                    ],
+                }
+            });
+        }
+        // end: Popper
+
+
+
+        // start: Tab
+        document.querySelectorAll('[data-tab]').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                e.preventDefault()
+                const tab = item.dataset.tab
+                const page = item.dataset.tabPage
+                const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
+                document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function (i) {
+                    i.classList.remove('active')
+                })
+                document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function (i) {
+                    i.classList.add('hidden')
+                })
+                item.classList.add('active')
+                target.classList.remove('hidden')
+            })
+        })
+        // end: Tab
+
+
+
+        // start: Chart
+        new Chart(document.getElementById('order-chart'), {
+            type: 'line',
+            data: {
+                labels: generateNDays(7),
+                datasets: [
+                    {
+                        label: 'Active',
+                        data: generateRandomData(7),
+                        borderWidth: 1,
+                        fill: true,
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgb(59 130 246 / .05)',
+                        tension: .2
+                    },
+                    {
+                        label: 'Completed',
+                        data: generateRandomData(7),
+                        borderWidth: 1,
+                        fill: true,
+                        pointBackgroundColor: 'rgb(16, 185, 129)',
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgb(16 185 129 / .05)',
+                        tension: .2
+                    },
+                    {
+                        label: 'Canceled',
+                        data: generateRandomData(7),
+                        borderWidth: 1,
+                        fill: true,
+                        pointBackgroundColor: 'rgb(244, 63, 94)',
+                        borderColor: 'rgb(244, 63, 94)',
+                        backgroundColor: 'rgb(244 63 94 / .05)',
+                        tension: .2
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function generateNDays(n) {
+            const data = []
+            for (let i = 0; i < n; i++) {
+                const date = new Date()
+                date.setDate(date.getDate() - i)
+                data.push(date.toLocaleString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                }))
+            }
+            return data
+        }
+        function generateRandomData(n) {
+            const data = []
+            for (let i = 0; i < n; i++) {
+                data.push(Math.round(Math.random() * 10))
+            }
+            return data
+        }
+        // end: Chart
+
+
+    </script>
+
+</body>
+
+</html>

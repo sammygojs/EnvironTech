@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Comparison</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+
+<body class="text-gray-800 font-inter bg-cover bg-center items-center"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">
+    {% include 'user/navbar.html' %}
+
+    <main class="w-full md:mt-24 min-h-screen transition-all main">
+
+        <div class="">
+             <!-- Existing content above -->
+
+             <div class="container mx-auto px-4 py-2">
+                <!-- <h2 class="text-center text-2xl font-semibold mb-4">Summary Guide</h2> -->
+                <h1 class="text-center text-3xl font-semibold mb-4 mx-auto w-1/2 bg-white rounded-2xl py-4">Summary Guide</h1>
+                <div class="bg-white rounded-lg shadow-md p-6 w-3/4 mx-auto">
+                    {% if selected_products|length == 2 %}
+                    <p>
+                        <strong>Price:</strong>
+                        {% if selected_products[0].price < selected_products[1].price %} If price is a concern, choose
+                            <strong>{{ selected_products[0].name }}</strong> for a more budget-friendly option.
+                            {% else %}
+                            If price is a concern, choose <strong>{{ selected_products[1].name }}</strong> for a more
+                            budget-friendly option.
+                            {% endif %}
+                    </p>
+                    <p>
+                        <strong>Population Impact:</strong>
+                        {% if selected_products[0].population > selected_products[1].population %}
+                        Choose <strong>{{ selected_products[0].name }}</strong> for better impact in a more populous
+                        area.
+                        {% else %}
+                        Choose <strong>{{ selected_products[1].name }}</strong> for better impact in a more populous
+                        area.
+                        {% endif %}
+                    </p>
+                    <p>
+                        <strong>Energy Production:</strong>
+                        {% if selected_products[0].energy_production > selected_products[1].energy_production %}
+                        For higher energy output, go with <strong>{{ selected_products[0].name }}</strong>.
+                        {% else %}
+                        For higher energy output, go with <strong>{{ selected_products[1].name }}</strong>.
+                        {% endif %}
+                    </p>
+                    <p>
+                        <strong>Time to Recover Expense:</strong>
+                        {% if selected_products[0].time_to_recover_expense <
+                            selected_products[1].time_to_recover_expense %} <strong>{{ selected_products[0].name
+                            }}</strong> offers a quicker return on investment.
+                            {% else %}
+                            <strong>{{ selected_products[1].name }}</strong> offers a quicker return on investment.
+                            {% endif %}
+                    </p>
+                    <p>
+                        <strong>Carbon Offset:</strong>
+                        {% if selected_products[0].carbon_offset_per_year > selected_products[1].carbon_offset_per_year
+                        %}
+                        Opt for <strong>{{ selected_products[0].name }}</strong> for better environmental benefits.
+                        {% else %}
+                        Opt for <strong>{{ selected_products[1].name }}</strong> for better environmental benefits.
+                        {% endif %}
+                    </p>
+                    {% else %}
+                    <p>Please ensure two products are selected for a comprehensive comparison.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Additional content below -->
+            <div class="container mx-auto px-4 py-2 w-full">
+                <h1 class="text-center text-3xl font-semibold mb-4 mx-auto w-1/2 bg-white rounded-2xl py-4">Product
+                    Comparison</h1>
+
+                <div class="grid grid-cols-2 gap-4 ">
+                    {% for product in selected_products %}
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center justify-center mb-4 mb-2 border-b-4 border-gray-300 pb-1">
+                            <h2 class="text-xl font-semibold mr-4">{{ product.name }}</h2>
+                            <!-- <h3 class="text-xl font-bold mb-2 border-b-4 border-gray-300 pb-1">{{ product.country }}</h3> -->
+                            <img class="w-15 h-10"
+                                src="https://www.worldometers.info/img/flags/{{ product.name[:2].lower() }}-flag.gif"
+                                alt="Flag">
+                        </div>
+                        <table class="w-full">
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Name:</td>
+                                <td class="h-10">{{ product.name }}</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Description:</td>
+                                <td class="h-40">{{ product.description }}</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Price:</td>
+                                <td class="h-10">${{ product.price }}</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Country:</td>
+                                <td class="h-10">{{ product.country }}</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Population:</td>
+                                <td class="h-10">{{ product.population }} M</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Impact:</td>
+                                <td class="h-10">{{ product.impact }}</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Energy Production:</td>
+                                <td class="h-10">{{ product.energy_production }} kWh/day</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Time to Recover Expense:</td>
+                                <td class="h-10">{{ product.time_to_recover_expense }} days</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Carbon Offset per Year:</td>
+                                <td class="h-10">{{ product.carbon_offset_per_year }} tons</td>
+                            </tr>
+                            <tr class="p-5">
+                                <td class="font-semibold h-10">Electricity Grid Network (km):</td>
+                                <td class="h-10">{{ product.electricity_grid_network_km }} km</td>
+                            </tr>
+                        </table>
+                    </div>
+                    {% endfor %}
+
+
+
+                </div>
+            </div>
+           
+
+        </div>
+    </main>
+</body>
+<script src=" https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // start: Popper
+    const popperInstance = {}
+    document.querySelectorAll('.dropdown').forEach(function (item, index) {
+        const popperId = 'popper-' + index
+        const toggle = item.querySelector('.dropdown-toggle')
+        const menu = item.querySelector('.dropdown-menu')
+        menu.dataset.popperId = popperId
+        popperInstance[popperId] = Popper.createPopper(toggle, menu, {
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, 8],
+                    },
+                },
+                {
+                    name: 'preventOverflow',
+                    options: {
+                        padding: 24,
+                    },
+                },
+            ],
+            placement: 'bottom-end'
+        });
+    })
+    document.addEventListener('click', function (e) {
+        const toggle = e.target.closest('.dropdown-toggle')
+        const menu = e.target.closest('.dropdown-menu')
+        if (toggle) {
+            const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu')
+            const popperId = menuEl.dataset.popperId
+            if (menuEl.classList.contains('hidden')) {
+                hideDropdown()
+                menuEl.classList.remove('hidden')
+                showPopper(popperId)
+            } else {
+                menuEl.classList.add('hidden')
+                hidePopper(popperId)
+            }
+        } else if (!menu) {
+            hideDropdown()
+        }
+    })
+
+    function hideDropdown() {
+        document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+            item.classList.add('hidden')
+        })
+    }
+    function showPopper(popperId) {
+        popperInstance[popperId].setOptions(function (options) {
+            return {
+                ...options,
+                modifiers: [
+                    ...options.modifiers,
+                    { name: 'eventListeners', enabled: true },
+                ],
+            }
+        });
+        popperInstance[popperId].update();
+    }
+    function hidePopper(popperId) {
+        popperInstance[popperId].setOptions(function (options) {
+            return {
+                ...options,
+                modifiers: [
+                    ...options.modifiers,
+                    { name: 'eventListeners', enabled: false },
+                ],
+            }
+        });
+    }
+    // end: Popper
+
+    // start: Tab
+    document.querySelectorAll('[data-tab]').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            e.preventDefault()
+            const tab = item.dataset.tab
+            const page = item.dataset.tabPage
+            const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
+            document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function (i) {
+                i.classList.remove('active')
+            })
+            document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function (i) {
+                i.classList.add('hidden')
+            })
+            item.classList.add('active')
+            target.classList.remove('hidden')
+        })
+    })
+    // end: Tab
+</script>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+    <title>Country Comparison</title>
+    <!-- Include any necessary CSS libraries or stylesheets here -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body class="text-gray-800 font-inter">
+  {% include 'user/sideNav.html' %}
+
+    <!-- Main content -->
+    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
+      {% include 'user/navbar.html' %}
+      <div class="p-6">
+        <div style="font-family: 'Poppins';" class="flex-auto shadow p-4">
+          <div class="rounded flex  ">
+          </div>
+          <form action="/user/compareCountry" method="post" id="productForm">
+            <button
+              class="group [&_summary::-webkit-details-marker]:hidden font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
+              type="submit">Compare Selected Products</button>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
+    
+              {% for country in countries %}
+              <!-- Product Card (Repeat as needed) -->
+              <div class="bg-white p-6 rounded-lg shadow-md">
+                <input type="checkbox" name="countryCheckbox" value="{{country.name}}">
+                <!-- <h3 class="text-xl font-bold mb-2 border-b-4 border-gray-300 pb-1">{{country.name}}</h3> -->
+                <!-- <h3 class="text-xl font-bold mb-2 border-b-4 border-gray-300 pb-1">{{ product.country }}</h3> -->
+                <!-- <img src="https://readymadeui.com/india_flag.webp" class="w-6 mr-3"/> -->
+                <svg class="w-12 h-12" enable-background="new 0 0 512 512" viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="m0 256c0 31.314 5.633 61.31 15.923 89.043l240.077 22.261 240.077-22.261c10.29-27.733 15.923-57.729 15.923-89.043s-5.633-61.31-15.923-89.043l-240.077-22.261-240.077 22.261c-10.29 27.733-15.923 57.729-15.923 89.043z"
+                    fill="#ffda44" />
+                  <g fill="#d80027">
+                    <path
+                      d="m496.077 166.957c-36.171-97.484-130.006-166.957-240.077-166.957s-203.906 69.473-240.077 166.957z" />
+                    <path
+                      d="m15.923 345.043c36.171 97.484 130.006 166.957 240.077 166.957s203.906-69.473 240.077-166.957z" />
+                  </g>
+                  <g />
+                </svg>
+                <p class="text-gray-700">potential solar generation (kWh/kWp per year) : {{country["potential solar generation (kWh per kWp per year)"]}}</p>
+                <!-- <p class="mt-4 font-bold">£{{country.price}}/roof</p> -->
+    
+                <!-- <svg class="h-8 w-8 text-slate-500 inline"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />  <circle cx="9" cy="7" r="4" />  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />  <path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg> -->
+                <p class="mt-4 font-bold">
+                  <svg class="h-8 w-8 text-slate-500 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Population : {{country["population (millions)"]}} M
+                </p>
+                <!-- <p class="mt-4 font-bold ">
+                  <svg class="h-8 w-8 text-slate-500 inline " viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  {{country.energy_production}} kWh / day
+                </p>
+                <p class="mt-4 font-bold">
+                  <svg class="h-8 w-8 text-slate-500 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                  </svg>
+                  {{country.impact}} Impact
+                </p>
+                
+              </div>
+              
+              <!-- End Product Card -->
+            </div>
+              {% endfor %}
+    
+            
+          </div> 
+        </div>    
+      </div>  
+    </main>
+
+    <!-- Include any necessary JavaScript files or scripts here -->
+
+</body>
+
+
+<script>
+  document.getElementById("countryForm").addEventListener("submit", function(event) {
+      const selectedCheckboxes = document.querySelectorAll('input[name="countryCheckbox"]:checked');
+      if (selectedCheckboxes.length < 2) {
+          event.preventDefault(); // Prevent form submission
+          alert("Please select at least two countries.");
+      }
+  });
+</script>
+<script>
+  const checkboxes = document.querySelectorAll('input[name="countryCheckbox"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', limitSelection);
+  });
+
+  function limitSelection() {
+    let checkedCount = 0;
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkedCount++;
+      }
+    });
+
+    if (checkedCount >= 2) {
+      checkboxes.forEach((checkbox) => {
+        if (!checkbox.checked) {
+          checkbox.disabled = true;
+        }
+      });
+    } else {
+      checkboxes.forEach((checkbox) => {
+        checkbox.disabled = false;
+      });
+    }
+  }
+</script>
+</html>

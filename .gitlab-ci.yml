@@ -1,0 +1,37 @@
+image: python:latest
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
+before_script:
+  - python --version ; pip --version
+  - pip install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+
+test:
+  script:
+    - pip install -r requirements.txt
+    - python -m pytest
+  artifacts:
+    paths:
+      - test-reports/
+
+run:
+  script:
+    - pip install -r requirements.txt
+    - python -m pytest
+    # Add the command to run your application here
+  artifacts:
+    paths:
+      - logs/
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deployment script goes here"
+  environment: production

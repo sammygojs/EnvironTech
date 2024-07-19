@@ -1,0 +1,98 @@
+<header class="bg-white bg-opacity-20 backdrop-blur-md absolute top-0 left-0 right-0 z-50" id="Home">
+    <div class="container mx-auto flex items-center justify-between py-2">
+        <div>
+            <div
+                class="font-semibold text-xl text-gray-300 bg-gray-800 bg-opacity-20 rounded-full px-4 py-2 hover:text-white hover:bg-black px-4">
+                EnviroOffset Tech</div>
+        </div>
+        <div class="space-x-4">
+            <a href="/admin/dashboard"
+                class="font-semibold text-white hover:text-yellow-300 hover:border-b-2 border-yellow-300">Dashboard</a>
+            <div class="inline-block font-semibold text-white group">
+                <button class="flex items-center hover:text-yellow-300">
+                    Manage Accounts
+                    <svg class="fill-current h-4 w-4 transform group-hover:rotate-180 
+                            transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20">
+                        <path d="M5.859 12.66l4.141-4.27 4.141 4.27H5.859z" />
+                    </svg>
+                </button>
+                <div class="absolute hidden group-hover:block text-white bg-gray-700 border border-gray-600">
+                    <a href="/admin/allUsers"
+                        class="block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300 w-36">Users</a>
+                    <a href="/admin/allStaff"
+                        class="block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300 w-36">Staff</a>
+                    <a href="/admin/allAdmin"
+                        class="block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300 w-36">Admin</a>
+                </div>
+            </div>
+            <div class="inline-block font-semibold text-white group">
+                <button class="flex items-center hover:text-yellow-300">
+                    Add Account
+                    <svg class="fill-current h-4 w-4 transform group-hover:rotate-180 
+                            transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20">
+                        <path d="M5.859 12.66l4.141-4.27 4.141 4.27H5.859z" />
+                    </svg>
+                </button>
+                <div class="absolute hidden group-hover:block text-white bg-gray-700 border border-gray-600">
+                    <a href="/admin/addUser"
+                        class="block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300">Add Users</a>
+                    <a href="/admin/addStaff"
+                        class="block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300">Add Staff</a>
+                    <!-- <a href="/admin/addStaff"
+                        class="block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300">Add Admin</a> -->
+                </div>
+            </div>
+            <a href="/admin/addProduct"
+                class="font-semibold text-white hover:text-yellow-300 hover:border-b-2 border-yellow-300">Create
+                product</a>
+        </div>
+
+        <div class="dropdown ml-3">
+            <button type="button" class="dropdown-toggle flex items-center">
+                <div class="flex-shrink-0 w-10 h-10 relative">
+                    <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://laravelui.spruko.com/tailwind/ynex/build/assets/images/faces/9.jpg" alt="" />
+                        <div
+                            class="top-0 left-7 absolute w-3 h-3 bg-lime-400 border-2 border-white rounded-full animate-ping">
+                        </div>
+                        <div class="top-0 left-7 absolute w-3 h-3 bg-lime-500 border-2 border-white rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-2 md:block text-left">
+                    {% if admin %}
+                    <h2 class="text-sm font-semibold text-white">{{admin.email}}</h2>
+                    {% else %}
+                    <h2 class="text-sm font-semibold text-white">Admin</h2>
+                    {% endif %}
+                </div>
+            </button>
+            <ul
+                class="dropdown-menu text-white bg-gray-700 border border-gray-600 mt-1 absolute hidden group-hover:block">
+                <!-- <li>
+                    <a href="/admin/update_profile"
+                        class="text-sm block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300">Update
+                        profile</a>
+                </li>
+                <li>
+                    <a href="/user/forgotPassword"
+                        class="text-sm block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300">Forgot
+                        password</a>
+                </li> -->
+                <li>
+                    <form action="/logout">
+                        <a href="/logout" role="menuitem"
+                            class="text-sm block px-4 py-2 hover:bg-gray-600 hover:border-b-2 border-yellow-300"
+                            onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                            Log Out
+                        </a>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <!-- end navbar -->
+    </div>
+</header>

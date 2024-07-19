@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnviroOffset Tech</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+        body {
+            font-family: Poppins;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 font-inter bg-cover bg-center items-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">">
+
+    {% include 'header.html' %}
+    <main class="w-full md:mt-24 min-h-screen transition-all main">
+    <!-- FAQ Section -->
+    <!-- <section class=" flex flex-col justify-center bg-cover p-5"> -->
+        <div class="container mx-auto">
+            <div class="">
+                <!-- Existing content above -->
+   
+                <div class="container mx-auto px-4 py-2">
+                   <!-- <h2 class="text-center text-2xl font-semibold mb-4">Summary Guide</h2> -->
+                   <h1 class="text-center text-3xl font-semibold mb-4 mx-auto w-1/2 bg-white rounded-2xl py-4">Summary Guide</h1>
+                   <div class="bg-white rounded-lg shadow-md p-6 w-3/4 mx-auto">
+                       {% if selected_products|length == 2 %}
+                       <p>
+                           <strong>Price:</strong>
+                           {% if selected_products[0].price < selected_products[1].price %} If price is a concern, choose
+                               <strong>{{ selected_products[0].name }}</strong> for a more budget-friendly option.
+                               {% else %}
+                               If price is a concern, choose <strong>{{ selected_products[1].name }}</strong> for a more
+                               budget-friendly option.
+                               {% endif %}
+                       </p>
+                       <p>
+                           <strong>Population Impact:</strong>
+                           {% if selected_products[0].population > selected_products[1].population %}
+                           Choose <strong>{{ selected_products[0].name }}</strong> for better impact in a more populous
+                           area.
+                           {% else %}
+                           Choose <strong>{{ selected_products[1].name }}</strong> for better impact in a more populous
+                           area.
+                           {% endif %}
+                       </p>
+                       <p>
+                           <strong>Energy Production:</strong>
+                           {% if selected_products[0].energy_production > selected_products[1].energy_production %}
+                           For higher energy output, go with <strong>{{ selected_products[0].name }}</strong>.
+                           {% else %}
+                           For higher energy output, go with <strong>{{ selected_products[1].name }}</strong>.
+                           {% endif %}
+                       </p>
+                       <p>
+                           <strong>Time to Recover Expense:</strong>
+                           {% if selected_products[0].time_to_recover_expense <
+                               selected_products[1].time_to_recover_expense %} <strong>{{ selected_products[0].name
+                               }}</strong> offers a quicker return on investment.
+                               {% else %}
+                               <strong>{{ selected_products[1].name }}</strong> offers a quicker return on investment.
+                               {% endif %}
+                       </p>
+                       <p>
+                           <strong>Carbon Offset:</strong>
+                           {% if selected_products[0].carbon_offset_per_year > selected_products[1].carbon_offset_per_year
+                           %}
+                           Opt for <strong>{{ selected_products[0].name }}</strong> for better environmental benefits.
+                           {% else %}
+                           Opt for <strong>{{ selected_products[1].name }}</strong> for better environmental benefits.
+                           {% endif %}
+                       </p>
+                       {% else %}
+                       <p>Please ensure two products are selected for a comprehensive comparison.</p>
+                       {% endif %}
+                   </div>
+               </div>
+   
+               <!-- Additional content below -->
+               <div class="container mx-auto px-4 py-2 w-full">
+                   <h1 class="text-center text-3xl font-semibold mb-4 mx-auto w-1/2 bg-white rounded-2xl py-4">Product
+                       Comparison</h1>
+   
+                   <div class="grid grid-cols-2 gap-4 ">
+                       {% for product in selected_products %}
+                       <div class="bg-white rounded-lg shadow-md p-6">
+                           <div class="flex items-center justify-center mb-4 mb-2 border-b-4 border-gray-300 pb-1">
+                               <h2 class="text-xl font-semibold mr-4">{{ product.name }}</h2>
+                               <!-- <h3 class="text-xl font-bold mb-2 border-b-4 border-gray-300 pb-1">{{ product.country }}</h3> -->
+                               <img class="w-15 h-10"
+                                   src="https://www.worldometers.info/img/flags/{{ product.name[:2].lower() }}-flag.gif"
+                                   alt="Flag">
+                           </div>
+                           <table class="w-full">
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Name:</td>
+                                   <td class="h-10">{{ product.name }}</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Description:</td>
+                                   <td class="h-40">{{ product.description }}</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Price:</td>
+                                   <td class="h-10">£{{ product.price }}</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Country:</td>
+                                   <td class="h-10">{{ product.country }}</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Population:</td>
+                                   <td class="h-10">{{ product.population }} M</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Impact:</td>
+                                   <td class="h-10">{{ product.impact }}</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Energy Production:</td>
+                                   <td class="h-10">{{ product.energy_production }} kWh/day</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Time to Recover Expense:</td>
+                                   <td class="h-10">{{ product.time_to_recover_expense }} days</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Carbon Offset per Year:</td>
+                                   <td class="h-10">{{ product.carbon_offset_per_year }} tons</td>
+                               </tr>
+                               <tr class="p-5">
+                                   <td class="font-semibold h-10">Electricity Grid Network (km):</td>
+                                   <td class="h-10">{{ product.electricity_grid_network_km }} km</td>
+                               </tr>
+                           </table>
+                       </div>
+                       {% endfor %}
+   
+   
+   
+                   </div>
+               </div>
+              
+   
+           </div>
+   
+        </div>
+    <!-- </section> -->
+</main>
+</body>
+<script src=" https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</html>

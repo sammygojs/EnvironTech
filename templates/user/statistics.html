@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}" />
+    <title>User | Stats</title>
+    <style>
+        .h1 {
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: larger;
+            color: #000;
+        }
+
+        .pos {
+            padding-left: 20px;
+
+        }
+
+        .icon-container {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* Style the active transportation mode differently */
+        .input-field {
+            display: inline-block;
+            /* Hide all input fields initially */
+            margin-top: 10px;
+            /* Spacing between icon and input field */
+        }
+
+        .icon-container.active {
+            background-color: #f2f2f2;
+        }
+
+        /* When active, display the input field */
+        .active+.input-field {
+            display: block;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .input-field-container {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        main button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        main button:hover {
+            background-color: #45a049;
+        }
+
+        #totalEmissions {
+            color: #ff4500;
+        }
+
+        /* Basic Reset */
+        main * {
+            margin: 0;
+            padding: 4px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Flexbox grid */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        [class*="col-"] {
+            display: flex;
+            flex-direction:
+                column;
+        }
+
+        /* Custom styles for prod-p-card */
+        .card.prod-p-card {
+            margin-bottom: 1rem;
+            /* Spacing between cards */
+            /* Rest of your styles */
+        }
+
+        /* More of your custom CSS */
+
+
+        @media (min-width: 1200px) {
+            .col-xl-8 {
+                flex: 0 0 50%;
+                max-width: 66.666667%;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            /* Stack content vertically */
+            justify-content: space-between;
+            /* Space between items */
+            height: 100%;
+            /* Make cards take full height */
+        }
+
+        .card .card-header .card-header-right .card-option {
+            width: 35px;
+            height: 0px;
+            overflow: hidden;
+            -webkit-transition: 0.3s ease-in-out;
+            transition: 0.3s ease-in-out
+        }
+
+        .card-header {
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        }
+
+        .card-body {
+            padding: 1.25rem;
+            flex: 1;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Aligns content and progress bar */
+            padding: 1.25rem;
+        }
+
+        /* Colored Cards */
+        .card-red {
+            background-color: #ff5370;
+            color: white;
+            /* padding: 30px; */
+            height: 60%;
+            width: auto;
+        }
+
+        .card-blue {
+            background-color: #4099ff;
+            color: white;
+            /* padding: 30px; */
+            height: 60%;
+            width: auto;
+        }
+
+        /* Progress bars */
+        .progress {
+            background-color: #d6d8de;
+            height: 1rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            /* Makes sure rounded corners are maintained */
+        }
+
+        .progress-bar {
+            background-color: #4099ff;
+            /* Adjust the color as needed */
+            width: auto;
+            /* Adjust the width as needed */
+            transition: width 0.6s ease;
+            height: 0rem;
+            border-radius: 0.5rem;
+            padding-right: 1px;
+        }
+
+
+        .progress .progress-bar {
+            height: 10%;
+            color: inherit;
+            overflow: unset;
+        }
+
+        /* Typography and Colors */
+        .text-white {
+            color: white;
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+
+        .f-w-700 {
+            font-weight: 700;
+        }
+
+        /* Icons */
+        .fa-money-bill-alt,
+        .fa-database {
+            color: currentColor;
+        }
+
+        .bg-c-yellow {
+            background: #FFB64D;
+            height: 0rem;
+            border-radius: 0.5rem;
+            padding-right: 1px;
+        }
+
+        .m-b-5 {
+            margin-bottom: 5px
+        }
+
+        .text-c-blue {
+            color: #4099ff
+        }
+
+        .bg-c-red {
+            background: #FF5370;
+            height: 0rem;
+            border-radius: 0.5rem;
+            padding-right: 1px;
+        }
+
+        .m-b-0 {
+            margin-bottom: 0px
+        }
+
+        .m-r-10 {
+            margin-right: 10px
+        }
+
+        .f-w-700 {
+            font-weight: 700
+        }
+
+        .col-auto {
+            flex: 0 0 auto;
+            width: auto
+        }
+
+        .text-c-red {
+            color: #FF5370
+        }
+
+        .f-18 {
+            font-size: 18px
+        }
+
+        .label {
+            border-radius: 2px;
+            color: #fff;
+            font-size: 12px;
+            line-height: 1;
+            margin-bottom: 0;
+            text-transform: capitalize
+        }
+
+        .col-xl-12 {
+            flex: 0 0 auto;
+            width: 100%
+        }
+
+        .offset-xl-0 {
+            margin-left: 0
+        }
+
+        .text-c-yellow {
+            color: #FFB64D
+        }
+
+        .text-c-green {
+            color: #2ed8b6
+        }
+
+        .bg-c-green {
+            background: #2ed8b6;
+            height: 0rem;
+            border-radius: 0.5rem;
+            padding-right: 1px;
+        }
+
+        /* This is an example. You might need to include the actual FontAwesome integration */
+
+        /* Custom styles for specific items */
+        .card.prod-p-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            padding: 0.25em 0.5em;
+            border-radius: 0.2rem;
+        }
+
+        .label-danger {
+            background-color: #ff5370;
+        }
+
+        .label-primary {
+            background-color: #4099ff;
+        }
+
+        /* Responsive */
+
+        @media (min-width: 1200px) {
+            .col-xl-8 {
+                flex: 0 0 66.666667%;
+                max-width: 66.666667%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .col-md-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+
+            .col-sm-12,
+            [class*="col-"] {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        .chart-container {
+            width: 500px;
+            height: 300px;
+        }
+
+        .chart-container canvas {
+            width: 100% !important;
+            /* Override any existing styles */
+            height: 100% !important;
+        }
+    </style>
+
+</head>
+
+<body class="text-gray-800 font-inter bg-cover bg-fixed bg-center"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">
+    ">
+    {% include 'user/navbar.html' %}
+
+    <main class="p-6 md:mt-16 md:mx-8">
+        <div class="p-6">
+            <section>
+                <div class="flex flex-row gap-4">
+                    <a href="#"
+                        class="block w-1/3 p-6 bg-white border border-gray-200 rounded shadow hover:bg-gray-100">
+                        <p class="font-normal text-gray-700">Your Own Contribution</p>
+                        {% if user %}
+                        {% if user.total_contribution == None %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">£
+                            0</h5>
+                        {% else %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">£
+                            {{user.total_contribution}}</h5>
+                        {% endif %}
+                        {% else %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">£ MOCK
+                            DATA</h5>
+                        {% endif %}
+                    </a>
+                    <a href="#"
+                        class="block w-1/3 p-6 bg-white border border-gray-200 rounded shadow hover:bg-gray-100">
+                        <p class="font-normal text-gray-700">Your Carbon Offset Achieved</p>
+                        {% if user %}
+                        {% if user.total_carbon_offset == None %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">
+                            0
+                            CO2 Tonnes</h5>
+                        {% else %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">
+                            {{user.total_carbon_offset|round(2)}}
+                            CO2 Tonnes
+                        </h5>
+                        {% endif %}
+                        {% else %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">MOCK DATA
+                            CO2 Tonnes</h5>
+                        {% endif %}
+
+                    </a>
+
+                    <a href="/user/upload_foot"
+                        class="block w-1/3 p-6 bg-white border border-gray-200 rounded shadow hover:bg-gray-100">
+                        <p class="font-normal text-gray-700">Your Carbon Footprint</p>
+                        {% if user %}
+                        {% if user.carbon_footprint == None %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-red-400">Click here
+                            to calculate footprint</h5>
+                        {% else %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">
+                            {{user.carbon_footprint}}
+                            Tonnes</h5>
+                        {% endif %}
+                        {% else %}
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">MOCK DATA
+                            CO2 Tonnes</h5>
+                        {% endif %}
+
+                    </a>
+
+                    {% if user.offset_under_neutral is none %}
+                    <a href="/user/upload_foot"
+                        class="block w-1/3 p-6 bg-white border border-gray-200 rounded shadow hover:bg-gray-100">
+                        <p class="font-normal text-gray-700">Offset to Neutral</p>
+
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-red-400">Click here
+                            to calculate footprint</h5>
+
+                    </a>
+                    </a>
+                    {% else %}
+                    <div class="block w-1/3 p-6 bg-white border border-gray-200 rounded shadow hover:bg-gray-100">
+                        <p class="font-normal text-gray-700">Your Offset To Neutral</p>
+                        <h2 class="mb-2 text-xl font-semibold text-red-600">
+                            {{user.carbon_footprint - user.total_carbon_offset | round(2)}} CO2 Tonnes
+                        </h5>
+                        <h2 class="mb-2 text-xl font-semibold text-red-600">
+                            {{100-((user.total_carbon_offset/user.carbon_footprint)*100)|round(2)}}% of your carbon footprint
+                        </h2>
+                    </div>
+                    {% endif %}
+                </div>
+        </div>
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div style="display: flex; justify-content: space-around; align-items: center;">
+                    <!-- Spending Chart -->
+                    <div class="card-block ml-2 rounded-2xl bg-gray-200" style="width: 500px; height: 300px;">
+                        <canvas id="spendingComparisonChart" style="width: 100%; height: 100%;"></canvas>
+                    </div>
+                    <!-- Carbon Offset Chart -->
+                    <div class="card-block ml-2 rounded-2xl bg-gray-200" style="width: 500px; height: 300px;">
+                        <canvas id="carbonOffsetComparisonChart" style="width: 100%; height: 100%;"></canvas>
+                    </div>
+                </div>
+
+                <!-- [ page content ] start -->
+                <div class="row">
+                    <!-- Sales Analytics start -->
+                    <div class=" w-full row">
+                        <div class=" w-3/4 mx-auto">
+                            <div class="card sale-card">
+                                <div class="card-header">
+                                    <h5 class="text-3xl">Realtime Country Carbon : use map with CO2 Levels</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <h1>User Country:</h1>
+                                        <div id="countryInfo"></div>
+                                        <div id="map"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 space-y-2 m-1">
+                            <div class="card prod-p-card card-red">
+                                <div class="card-body ">
+                                    <div class="row align-items-center justify-content-between m-b-30">
+                                        <div class="col">
+                                            <h6 class=" text-white">Total Contribution</h6>
+                                            <h6 class=" text-white">included all the users</h6>
+                                            <h3 class="f-w-700 text-white text-2xl mt-5">£ {{total_cost}}</h3>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-money-bill-alt text-c-red f-18"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card prod-p-card card-blue">
+                                <div class="card-body">
+                                    <div class="row align-items-center justify-content-between m-b-30">
+                                        <div class="col">
+                                            <h6 class="text-white">Total Carbon Offset</h6>
+                                            <h6 class="text-white">included all the users</h6>
+                                            <h3 class="text-xl mt-5 f-w-700 text-white">{{total_offset|round(2)}}</h3>
+                                            <h6 class="text-white">CO2 Tonnes</h6>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-database text-c-blue f-18"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sales Analytics end -->
+
+                    <!-- Application Sales start -->
+                    <div class="w-full mx-3">
+                        <div class="card table-card">
+                            <div class="card-header">
+                                <h5 class="text-3xl">Order History</h5>
+
+                            </div>
+                            <div class="card-block">
+                                <div class="table-responsive">
+                                    <table class="table-auto w-full ">
+                                        <thead class="bg-blue-500">
+                                            <tr>
+                                                <th>Order Date</th>
+                                                <th>Total Amount</th>
+                                                <th>Status</th>
+                                                <th>Product Origin</th>
+                                                <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center bg-blue-200 font-semibold">
+                                            {% for order, order_detail, product in orders %}
+                                            <tr>
+                                                <td>{{ order.order_date | datetimeformat }}</td>
+                                                <td>£{{ order.total_amount }}</td>
+                                                <td class="{% if order.is_Paid %}bg-green-500 text-white{% else %}bg-red-500 text-white{% endif %}">
+                                                    {% if order.is_Paid %}Paid{% else %}Unpaid{% endif %}
+                                                </td>
+                                                <td>
+                                                    <ul>
+                                                        <li>{{ product.name }}</li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    {{
+                                                    order_detail.quantity }}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="w-full">
+                        <div class="card sale-card">
+                            <div class="card-header">
+                                <h5>Real-Time Total Carbon Offset Including All Users</h5>
+                            </div>
+                            <div class="card-block text-center">
+                                <div id="realtime-profit" style="height:350px"> <canvas id="barChart"></canvas></div>
+
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Application Sales end -->
+
+                    <!-- map card start -->
+                    <!-- <div class="w-full"> -->
+                        <!-- <div class="card">
+                            <div class="card-header">
+                                <h5>Your Own Carbon Contribution</h5>
+                                <div class="card-header-right">
+
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <div id="sales-analytics" style="height: 300px;"> <canvas id="lineChart"></canvas>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- map card end -->
+
+
+                        <!-- Sumit edit -->
+                        <!-- <div class="col-xl-4 col-md-12">
+                <div class="card sale-card">
+
+                    <div class="card-header" style="margin-top: 9px">
+
+                        <h5>Realtime about User Carbon</h5>
+                    </div>
+                    <div class="card-block text-center">
+                        <div id="realtime-profit" style="height:350px"> 
+                            <canvas id="barChart"style="width: 100%; height: 400px; margin-left: 10px;"></canvas></div>
+
+                    </div>
+                </div> -->
+                        <!-- </div> -->
+                        <!-- Application Sales end -->
+
+                        <!-- map card start -->
+                        <!-- <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="margin-top: 9px; margin-bottom: 9px">
+                        <h5>Donate Analytics</h5>
+                        <div class="card-header-right">
+
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div id="sales-analytics" style="height: 300px;">
+                            <canvas id="lineChart"style="width: 100%; height: 400px; margin-left: 10px;"></canvas>
+                        </div>
+                    </div>
+                </div> -->
+                        <!-- map card end -->
+                    <!-- </div> -->
+                    <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 p-6 ">
+                        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
+                            <div class="flex justify-between mb-4 items-start">
+                                <div class="font-medium">Order Statistics Included all User's Application records</div>
+                                <div class="dropdown">
+                                    <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
+                                            class="ri-more-fill"></i></button>
+                                    <ul
+                                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                                        <li>
+                                            <a href="#"
+                                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                                <div class="rounded-md border border-dashed border-gray-200 p-4">
+                                    <div class="flex items-center mb-0.5">
+                                        <div class="text-xl font-semibold">10</div>
+                                        <span
+                                            class="p-1 rounded text-[12px] font-semibold bg-blue-500/10 text-blue-500 leading-none ml-1">${{
+                                            total_revenue }}</span>
+                                    </div>
+                                    <span class="text-gray-400 text-sm">Total Revenue:</span>
+                                </div>
+                                <div class="rounded-md border border-dashed border-gray-200 p-4">
+                                    <div class="flex items-center mb-0.5">
+                                        <div class="text-xl font-semibold">50</div>
+                                        <span
+                                            class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1">${{
+                                            average_order_value }}</span>
+                                    </div>
+                                    <span class="text-gray-400 text-sm">Average Order Value:</span>
+                                </div>
+                                <div class="rounded-md border border-dashed border-gray-200 p-4">
+                                    <div class="flex items-center mb-0.5">
+                                        <div class="text-xl font-semibold">4</div>
+                                        <span
+                                            class="p-1 rounded text-[12px] font-semibold bg-rose-500/10 text-rose-500 leading-none ml-1">-$130</span>
+                                    </div>
+                                    <span class="text-gray-400 text-sm">Canceled</span>
+                                </div>
+                            </div>
+                            <div class="w-full h-full">
+                                <canvas id="order-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+                            <div class="flex justify-between mb-4 items-start">
+                                <div class="font-medium">Previous Orders</div>
+                                <!-- <div class="dropdown">
+                                  <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i class="ri-more-fill"></i></button>
+                                  <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                                      <li>
+                                          <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+                                      </li>
+                                      <li>
+                                          <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
+                                      </li>
+                                      <li>
+                                          <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
+                                      </li>
+                                  </ul>
+                              </div> -->
+                            <!-- </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full min-w-[460px]">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tl-md rounded-bl-md">
+                                                Order Date</th>
+                                            <th
+                                                class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">
+                                                Total Amount</th>
+                                            <th
+                                                class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">
+                                                Order Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="min-w-full">
+                                        {% for order in orders %}
+                                        <tr class="h-32">
+                                            <td class="py-2 px-4 border-b border-b-gray-50">
+                                                <div class="flex items-center">
+                                                    <img src="https://placehold.co/32x32" alt=""
+                                                        class="w-8 h-8 rounded object-cover block">
+                                                    <a href="#"
+                                                        class="text-gray-600 text-sm font-medium hover:text-blue-500 ml-2 truncate">{{
+                                                        order.order_date }}</a>
+                                                </div>
+                                            </td>
+                                            <td class="py-2 px-4 border-b border-b-gray-50">
+                                                <span class="text-[13px] font-medium">$ {{ order.total_amount }}</span>
+                                            </td>
+                                            <td class="py-2 px-4 border-b border-b-gray-50">
+                                                <span
+                                                    class="inline-block p-1 rounded {% if order.is_paid %}bg-emerald-500/10 text-emerald-500{% else %}bg-rose-500/10 text-rose-500{% endif %} font-medium text-[12px] leading-none">
+                                                    {% if order.is_paid %}
+                                                    Paid
+                                                    {% else %}
+                                                    Pending
+                                                    {% endif %}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+
+                </div> --> -->
+                <!-- [ page content ] end -->
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+
+    </main>
+</body>
+<script src=" https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="{{ url_for('static', filename='js/layout.js') }}"></script> -->
+<script>
+    // 使用jQuery或其他工具发送Ajax请求
+    fetch('/api/data')
+        .then(response => response.json())
+        .then(data => {
+            // 假设我们获取到的数据是按月份分的
+            // 更新barData和lineData中的data属性
+            barData.datasets[0].data = data.carbon_offsets;
+            lineData.datasets[0].data = data.contributions;
+
+            // 以下是创建图表的代码，这段代码应该在数据更新后调用
+            // 创建或更新Bar Chart
+            new Chart(document.getElementById('barChart'), {
+                type: 'bar',
+                data: barData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 创建或更新Line Chart
+            new Chart(document.getElementById('lineChart'), {
+                type: 'line',
+                data: lineData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.log('Error fetching and parsing data', error);
+        });
+
+
+    // start: Popper
+    const popperInstance = {}
+    document.querySelectorAll('.dropdown').forEach(function (item, index) {
+        const popperId = 'popper-' + index
+        const toggle = item.querySelector('.dropdown-toggle')
+        const menu = item.querySelector('.dropdown-menu')
+        menu.dataset.popperId = popperId
+        popperInstance[popperId] = Popper.createPopper(toggle, menu, {
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, 8],
+                    },
+                },
+                {
+                    name: 'preventOverflow',
+                    options: {
+                        padding: 24,
+                    },
+                },
+            ],
+            placement: 'bottom-end'
+        });
+    })
+    document.addEventListener('click', function (e) {
+        const toggle = e.target.closest('.dropdown-toggle')
+        const menu = e.target.closest('.dropdown-menu')
+        if (toggle) {
+            const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu')
+            const popperId = menuEl.dataset.popperId
+            if (menuEl.classList.contains('hidden')) {
+                hideDropdown()
+                menuEl.classList.remove('hidden')
+                showPopper(popperId)
+            } else {
+                menuEl.classList.add('hidden')
+                hidePopper(popperId)
+            }
+        } else if (!menu) {
+            hideDropdown()
+        }
+    })
+
+    function hideDropdown() {
+        document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+            item.classList.add('hidden')
+        })
+    }
+    function showPopper(popperId) {
+        popperInstance[popperId].setOptions(function (options) {
+            return {
+                ...options,
+                modifiers: [
+                    ...options.modifiers,
+                    { name: 'eventListeners', enabled: true },
+                ],
+            }
+        });
+        popperInstance[popperId].update();
+    }
+    function hidePopper(popperId) {
+        popperInstance[popperId].setOptions(function (options) {
+            return {
+                ...options,
+                modifiers: [
+                    ...options.modifiers,
+                    { name: 'eventListeners', enabled: false },
+                ],
+            }
+        });
+    }
+    // end: Popper
+
+    // start: Tab
+    document.querySelectorAll('[data-tab]').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            e.preventDefault()
+            const tab = item.dataset.tab
+            const page = item.dataset.tabPage
+            const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
+            document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function (i) {
+                i.classList.remove('active')
+            })
+            document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function (i) {
+                i.classList.add('hidden')
+            })
+            item.classList.add('active')
+            target.classList.remove('hidden')
+        })
+    })
+    // end: Tab
+
+
+    // start: Chart
+    new Chart(document.getElementById('order-chart'), {
+        type: 'line',
+        data: {
+            labels: generateNDays(7),
+            datasets: [
+                {
+                    label: 'Active',
+                    data: generateRandomData(7),
+                    borderWidth: 1,
+                    fill: true,
+                    pointBackgroundColor: 'rgb(59, 130, 246)',
+                    borderColor: 'rgb(59, 130, 246)',
+                    backgroundColor: 'rgb(59 130 246 / .05)',
+                    tension: .2
+                },
+                {
+                    label: 'Completed',
+                    data: generateRandomData(7),
+                    borderWidth: 1,
+                    fill: true,
+                    pointBackgroundColor: 'rgb(16, 185, 129)',
+                    borderColor: 'rgb(16, 185, 129)',
+                    backgroundColor: 'rgb(16 185 129 / .05)',
+                    tension: .2
+                },
+                {
+                    label: 'Canceled',
+                    data: generateRandomData(7),
+                    borderWidth: 1,
+                    fill: true,
+                    pointBackgroundColor: 'rgb(244, 63, 94)',
+                    borderColor: 'rgb(244, 63, 94)',
+                    backgroundColor: 'rgb(244 63 94 / .05)',
+                    tension: .2
+                },
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    function generateNDays(n) {
+        const data = []
+        for (let i = 0; i < n; i++) {
+            const date = new Date()
+            date.setDate(date.getDate() - i)
+            data.push(date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric'
+            }))
+        }
+        return data
+    }
+    function generateRandomData(n) {
+        const data = []
+        for (let i = 0; i < n; i++) {
+            data.push(Math.round(Math.random() * 10))
+        }
+        return data
+    }
+    // end: Chart
+
+    // pie fata
+    const pieData = {
+        labels: ['UK', 'USA', 'France', 'China', 'Russia'],
+        datasets: [{
+            data: [300, 50, 100, 30, 50],
+            backgroundColor: ['red', 'blue', 'yellow', 'Green', 'purple']
+        }]
+    };
+
+    // barData
+    const barData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'Number of Items Sold',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+            borderColor: 'rgba(0, 123, 255, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    // lineData
+    const lineData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'Dataset 1',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
+
+    // pieChart
+    const pieChart = new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: pieData
+    });
+
+    // barChart
+    const barChart = new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: barData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // lineChart
+    const lineChart = new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: lineData,
+        options: {
+            aspectRatio: 3,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+<script>
+    // var map;  // 全局变量来引用地图实例
+    //
+    // function initMap() {
+    //     // 创建地图实例，初始中心点设为地球的中心
+    //     map = new google.maps.Map(document.getElementById('map'), {
+    //         zoom: 2,
+    //         center: {lat: 0, lng: 0}
+    //     });
+    // }
+    //
+    // // 从服务器获取国家信息，并使用Google Maps Geocoding API 定位
+    // fetch('/user/statsticofcountry')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         if (data.error) {
+    //             document.getElementById('countryInfo').textContent = 'Error: ' + data.error;
+    //         } else {
+    //             centerMapOnCountry(data.country);
+    //         }
+    //     })
+    //     .catch(error => console.error('Fetch error:', error));
+    //
+    // function centerMapOnCountry(country) {
+    //     var geocoder = new google.maps.Geocoder();
+    //     geocoder.geocode({ 'address': country }, function(results, status) {
+    //         if (status === google.maps.GeocoderStatus.OK) {
+    //             // 重新定位地图
+    //             map.setCenter(results[0].geometry.location);
+    //             map.setZoom(5);  // 设置一个更为详细的缩放级别
+    //
+    //             // 添加一个标记在国家的中心
+    //             new google.maps.Marker({
+    //                 map: map,
+    //                 position: results[0].geometry.location
+    //             });
+    //         } else {
+    //             document.getElementById('countryInfo').textContent = 'Geocode was not successful for the following reason: ' + status;
+    //         }
+    //     });
+    // }
+    //
+    //
+    //     var map; // 全局变量来引用地图实例
+    //
+    //     function initMap() {
+    //     // 创建地图实例，初始中心点设为地球的中心
+    //     map = new google.maps.Map(document.getElementById('map'), {
+    //         zoom: 2,
+    //         center: {lat: 0, lng: 0}
+    //     });
+    // }
+    //
+    //     // 从服务器获取国家信息，并使用Google Maps Geocoding API 定位
+    //     fetch('/user/statsticofcountry')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //     if (data.error) {
+    //     document.getElementById('countryInfo').textContent = 'Error: ' + data.error;
+    // } else {
+    //     centerMapOnCountry(data.country, data.gridCarbonIntensity);
+    // }
+    // })
+    //     .catch(error => console.error('Fetch error:', error));
+    //
+    //     function centerMapOnCountry(country, carbonIntensity) {
+    //     var geocoder = new google.maps.Geocoder();
+    //     geocoder.geocode({'address': country}, function(results, status) {
+    //     if (status === google.maps.GeocoderStatus.OK) {
+    //     // 重新定位地图
+    //     map.setCenter(results[0].geometry.location);
+    //     map.setZoom(5);  // 设置一个更为详细的缩放级别
+    //
+    //     // 添加一个标记在国家的中心
+    //     var marker = new google.maps.Marker({
+    //     map: map,
+    //     position: results[0].geometry.location
+    // });
+    //
+    //     // 创建一个信息窗口，显示grid carbon intensity
+    //     var infoWindow = new google.maps.InfoWindow({
+    //     content: 'Grid Carbon Intensity: ' + carbonIntensity + ' gCO2eq/kWh'
+    // });
+    //
+    //     // 添加点击标记后显示信息窗口的事件监听
+    //     marker.addListener('click', function() {
+    //     infoWindow.open(map, marker);
+    // });
+    //
+    // } else {
+    //     document.getElementById('countryInfo').textContent = 'Geocode was not successful for the following reason: ' + status;
+    // }
+    // });
+    // }
+    var map;  // 全局变量来引用地图实例
+
+    function initMap() {
+        // 创建一个初始的空地图
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 2,
+            center: { lat: 0, lng: 0 }
+        });
+
+        // 固定国家列表及其CO2等级
+        const countries = {
+            "Russia": 900,
+            "China": 800,
+            "USA": 700,
+            "Brazil": 650,
+            "Australia": 600,
+            "India": 500,
+
+            "Egypt": 400,
+            "Germany": 320,
+            "France": 300,
+            "Uk":280,
+            "Italy":260,
+            "Japan":220,
+            "Spain":150,
+            "Nigeria":100,
+
+   };
+
+        // 添加固定国家的标记
+        Object.keys(countries).forEach(country => {
+            addMarkerForCountry(country, countries[country]);
+        });
+
+        // 获取并处理用户所在国家
+        fetchUserCountry(countries);
+    }
+
+    function fetchUserCountry(countries) {
+        fetch('/user/statsticofcountry')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('countryInfo').textContent = 'Error: ' + data.error;
+                } else {
+                    if (countries.hasOwnProperty(data.country)) {
+                        addMarkerForCountry(data.country, countries[data.country], true);
+                    } else {
+                        document.getElementById('countryInfo').textContent = `No data available for ${data.country}`;
+                    }
+                }
+            })
+            .catch(error => console.error('Fetch error:', error));
+    }
+
+    function addMarkerForCountry(country, carbonIntensity, zoomIn=false) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': country }, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                var location = results[0].geometry.location;
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: location
+                });
+                var infoWindow = new google.maps.InfoWindow({
+                    content: 'Grid Carbon Intensity: ' + carbonIntensity + ' gCO2eq/kWh'
+                });
+                marker.addListener('click', function () {
+                    infoWindow.open(map, marker);
+                });
+
+                if (zoomIn) {
+                    map.setCenter(location);
+                    map.setZoom(5);
+                }
+            } else {
+                document.getElementById('countryInfo').textContent = 'Geocode was not successful for the following reason: ' + status;
+            }
+        });
+    }
+
+    // 初始化地图
+    initMap();
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvyHLg46eG2znKuV8YDy2gC7TvUnJSCBU&callback=initMap&language=en">
+    </script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('spendingComparisonChart').getContext('2d');
+        var spendingComparisonChart = new Chart(ctx, {
+            type: 'bar', // Changed from 'line' to 'bar'
+            data: {
+                labels: ['Your Spending', 'Average System Spending'],
+                datasets: [{
+                    label: 'Spending Comparison (in GBP)',
+                    data: [{{ total_user_spending }}, {{ average_system_spending }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)', // color for individual user spending
+                'rgba(54, 162, 235, 0.8)'  // color for average system spending
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+            },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1 // Adjust the step size as necessary
+                }
+            }
+        }
+    }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('carbonOffsetComparisonChart').getContext('2d');
+        var carbonOffsetComparisonChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Your Carbon Offset', 'Average Carbon Offset'],
+                datasets: [{
+                    label: 'Carbon Offset Comparison(In CO2 Tonnes)',
+                    data: [{{ user_carbon_offset }}, {{ average_carbon_offset }}],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.8)', // color for individual user carbon offset
+                'rgba(153, 102, 255, 0.8)'  // color for average carbon offset
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+        }]
+            },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+        });
+    });
+</script>
+
+
+</html>

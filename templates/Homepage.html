@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnviroOffset Tech</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+        body {
+            font-family: Poppins;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+</head>
+
+<body class="bg-gray-100">
+    {% include 'header.html' %}
+
+    <!-- Hero Section -->
+    <section class="relative bg-cover bg-center h-screen flex items-center"
+        style="background-image: url('{{ url_for('static', filename='images/solarPanels.jpg') }}')">
+        <div class="absolute top-0 left-0 w-full h-full bg-gray-800 opacity-20"></div>
+        <div class="container mx-auto text-center text-white relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                Empower Your Future with Clean Energy
+            </h1>
+            <p class="text-lg md:text-xl mb-8">
+                Discover sustainable solutions to offset your carbon footprint.
+            </p>
+            <a href="/products"
+                class=" bg-gradient-to-b from-white to-yellow-500 font-semibold text-2xl text-black px-6 py-3 rounded-full hover:bg-indigo-700">Explore
+                Products</a>
+        </div>
+    </section>
+
+    <!-- Eco-Conscious Business Leader Section
+    <section class="bg-gray-100 py-16 px-4 h-fit bg-gradient-to-b from-gray-200 to-white" id="Sustainability">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            Text Content
+            <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+                <h2 class="text-3xl font-bold mb-4">
+                    Join Eco-Conscious Business Leaders Like John Greenfield
+                </h2>
+                <p class="text-gray-700 mb-8">
+                    Discover how you can reduce your carbon footprint and contribute to
+                    a sustainable future. Our platform provides tailored solutions for
+                    frequent business travelers and urban professionals.
+                </p>
+                <a href="#" class="bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-700">Explore
+                    Sustainable Solutions</a>
+            </div>
+
+            Business Image
+            <div class="md:w-1/2">
+                <img src="{{ url_for('static', filename='images/businessman.jpg') }}" alt="Business Image"
+                    class="w-full h-auto rounded-lg" />
+            </div>
+        </div>
+    </section>
+
+    Sustainable Artist Section
+    <section class="bg-white py-4 px-4 h-fit bg-gradient-to-b from-white to-gray-200">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            Artist Image
+            <div class="md:w-1/2">
+                <img src="{{ url_for('static', filename='images/artist.jpg') }}" alt="Artist Image"
+                    class="w-full h-auto rounded-lg" />
+            </div>
+
+            Text Content
+            <div class="md:w-1/2 text-center md:text-left pl-8">
+                <h2 class="text-3xl font-bold mb-4">
+                    Unleash Your Creativity and Embrace Sustainability
+                </h2>
+                <p class="text-gray-700 mb-8">
+                    As an artist, you have the power to inspire change. Explore
+                    sustainable art practices and join a community of creatives
+                    committed to making a positive impact on the environment. Our
+                    platform provides resources and products to help you express your
+                    creativity while contributing to a greener world.
+                </p>
+                <a href="#" class="bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-700">Explore
+                    Sustainable Art</a>
+            </div>
+        </div>
+    </section>-->
+
+    <!-- Footer -->
+    <footer class="text-white py-8 px-4 bg-gradient-to-b from-gray-700 to-gray-900">
+        <div class="container mx-auto flex justify-around items-center">
+            <!-- Newsletter Signup -->
+            <div>
+                <h3 class="text-2xl font-bold mb-2">Subscribe to Newsletter</h3>
+                <input type="email" placeholder="Your email" class="bg-gray-700 text-white px-4 py-2 rounded-full" />
+                <button class="bg-green-500 text-white px-6 py-2 rounded-full">
+                    Subscribe
+                </button>
+            </div>
+            <!-- Contact Information -->
+            <div>
+                <h3 class="text-2xl font-bold mb-2">Contact Us</h3>
+                <p class="text-gray-500">Email: info@yourcompany.com</p>
+                <p class="text-gray-500">Phone: (123) 456-7890</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Check for the error parameter and open the modal if present -->
+
+    <script>
+        // Function to open the modal with a custom message
+        function openModal(message) {
+            // Get the modal element
+            var modal = document.getElementById('my_modal_3');
+
+            // Check if the modal element exists
+            if (modal) {
+                // Display the custom message in the modal
+                var modalHeader = modal.querySelector('.modal-box h3');
+                if (modalHeader) {
+                    modalHeader.textContent = message;
+                }
+
+                // Open the modal
+                modal.showModal();
+            } else {
+                console.error('Modal element not found.');
+            }
+        }
+
+        function redirectToForgotPasswordPage(){
+            var newLink = "/forgotPassword";
+            window.location.href = newLink;
+        }
+
+        function redirectToRegisterPage() {
+            var newLink = "/user/register";
+            window.location.href = newLink;
+        }
+
+        function redirectToHomepage(){
+            var newLink = "/";
+            window.location.href = newLink;
+        }
+    </script>
+
+    {% if error_message %}
+    <script>
+        openModal('{{error_message}}');
+    </script>
+    {% endif %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+
+</html>

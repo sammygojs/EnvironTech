@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | {{product.name}}</title>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+    .blur-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        background-size: cover;
+        backdrop-filter: blur(2px);
+        z-index: -1;
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .translucent-container {
+        background-color: rgba(255, 255, 255, 0.901);
+        /* White color with 50% opacity */
+        padding: 20px;
+        /* Add padding for better appearance */
+        border-radius: 10px;
+        /* Optional: Add rounded corners */
+        width: 80%;
+        /* Optional: Set width */
+        margin: 0 auto;
+        /* Optional: Center horizontally */
+    }
+
+    .styled-button {
+        background-color: #155a9a;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 20px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .styled-button:hover {
+        background-color: #2e84a1;
+        /* Darker Green */
+    }
+
+    .flag-image {
+
+        /* Set a maximum width to maintain the original size */
+        height: auto;
+        /* Allow the height to adjust proportionally */
+        box-shadow: transparent;
+        /* Optional: Add a shadow effect */
+    }
+
+    .back-button {
+        color: #ffffff;
+        /* Set the text color to black */
+        background-color: #525252;
+        /* Remove any background color */
+        border: none;
+        /* Remove the default button border */
+        border-radius: 50%;
+        /* Set border-radius to 50% for a round shape */
+        width: 40px;
+        /* Set a fixed width for the button */
+        height: 40px;
+        /* Set a fixed height for the button */
+        cursor: pointer;
+        /* Set cursor to pointer on hover */
+        display: flex;
+        /* Use flexbox to center icon and text */
+        align-items: center;
+        /* Center vertically */
+        justify-content: center;
+        /* Center horizontally */
+    }
+
+    body {
+            font-family: Poppins;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+</style>
+<style>
+    /* Custom Styles */
+    header {
+        background-color: rgba(255, 255, 255, 0.8);
+        /* White with 80% opacity */
+        backdrop-filter: blur(10px);
+    }
+
+    body {
+        font-family: Poppins;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+
+<body class="text-gray-800 font-inter bg-cover bg-fixed bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">">
+
+    {% include 'header.html' %}
+    <div class="blur-bg"></div>
+    <main class="cpntent mx-auto my-24 transition-all  main translucent-container">
+        <section>
+
+            <div class="md:flex items-start justify-center py-12 2xl:px md:px-6 px-4">
+                <button class="back-button" onclick="window.location.href='/user/home'"><i
+                        class="fas fa-arrow-left"></i></button>
+                <img class="flag-image 2xl:px-10"
+                    src="https://www.worldometers.info/img/flags/{{ product.name[:2].lower() }}-flag.gif" alt="Flag">
+                <div class="md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
+                    <div class="border-b border-gray-200 pb-6">
+                        <h1 class="font-semibold lg:leading-6 leading-7 mt-2" style="font-size: 30px;">Solar Roofs at {{product.name}}
+                        </h1>
+                    </div>
+                    <div class="border-b border-gray-200 pb-6">
+                        <p class="  leading-4 mt-7" style="font-size: 17px; text-align: justify;">
+                            <strong>Description:</strong> {{ product.description }}</p>
+                        <p class="  leading-4 mt-7" style="font-size: 17px;"><strong>Price:</strong> £ {{ product.price
+                            }}</p>
+                        <p class="  leading-4 mt-7" style="font-size: 17px;"><strong>Country:</strong> {{
+                            product.country }}</p>
+                        <p class="  leading-4 mt-7" style="font-size: 17px;"><strong>Population:</strong> {{
+                            product.population }} M</p>
+                        <p class="  leading-4 mt-7" style="font-size: 17px;"><strong>Impact:</strong> {{ product.impact
+                            }}</p>
+                        <p class="  leading-4 mt-7" style="font-size: 17px;"><strong>Energy Production:</strong> {{
+                            product.energy_production }} kWh/day</p>
+                        <p class="  leading-4 mt-7" style="font-size: 17px;"><strong>Time to Recover Expense:</strong>
+                            {{ product.time_to_recover_expense }} days</p>
+                        <p class="  leading-4 mt-7" style="font-size: 17px;"><strong>Carbon Offset Per Year:</strong> {{
+                            product.carbon_offset_per_year }} tons</p>
+                      </div>
+                    <!-- <form action="/" method="post"> -->
+                        <a href="/">
+                        <button type="submit" name="addToCart" value="value" class="styled-button">
+                            Login to Invest
+                        </button>
+                    </a>
+                    <!-- </form> -->
+                    <!-- <a href="/user/home" class="hover:text-blue-600 font-bold">Go to Home</a> -->
+                </div>
+
+            </div>
+        </section>
+    </main>
+</body>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // start: Tab
+    document.querySelectorAll('[data-tab]').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            e.preventDefault()
+            const tab = item.dataset.tab
+            const page = item.dataset.tabPage
+            const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
+            document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function (i) {
+                i.classList.remove('active')
+            })
+            document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function (i) {
+                i.classList.add('hidden')
+            })
+            item.classList.add('active')
+            target.classList.remove('hidden')
+        })
+    })
+    // end: Tab
+
+    // start: Popper
+    const popperInstance = {}
+    document.querySelectorAll('.dropdown').forEach(function (item, index) {
+        const popperId = 'popper-' + index
+        const toggle = item.querySelector('.dropdown-toggle')
+        const menu = item.querySelector('.dropdown-menu')
+        menu.dataset.popperId = popperId
+        popperInstance[popperId] = Popper.createPopper(toggle, menu, {
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, 8],
+                    },
+                },
+                {
+                    name: 'preventOverflow',
+                    options: {
+                        padding: 24,
+                    },
+                },
+            ],
+            placement: 'bottom-end'
+        });
+    })
+    document.addEventListener('click', function (e) {
+        const toggle = e.target.closest('.dropdown-toggle')
+        const menu = e.target.closest('.dropdown-menu')
+        if (toggle) {
+            const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu')
+            const popperId = menuEl.dataset.popperId
+            if (menuEl.classList.contains('hidden')) {
+                hideDropdown()
+                menuEl.classList.remove('hidden')
+                showPopper(popperId)
+            } else {
+                menuEl.classList.add('hidden')
+                hidePopper(popperId)
+            }
+        } else if (!menu) {
+            hideDropdown()
+        }
+    })
+
+    function hideDropdown() {
+        document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+            item.classList.add('hidden')
+        })
+    }
+    function showPopper(popperId) {
+        popperInstance[popperId].setOptions(function (options) {
+            return {
+                ...options,
+                modifiers: [
+                    ...options.modifiers,
+                    { name: 'eventListeners', enabled: true },
+                ],
+            }
+        });
+        popperInstance[popperId].update();
+    }
+    function hidePopper(popperId) {
+        popperInstance[popperId].setOptions(function (options) {
+            return {
+                ...options,
+                modifiers: [
+                    ...options.modifiers,
+                    { name: 'eventListeners', enabled: false },
+                ],
+            }
+        });
+    }
+    // end: Popper
+</script>
+
+</html>

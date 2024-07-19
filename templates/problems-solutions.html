@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnviroOffset Tech</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+        body {
+            font-family: Poppins;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <!-- Problem & Solution Section -->
+    <section class="h-screen flex flex-col justify-center bg-cover bg-center relative"
+        style="background-image: url('{{ url_for('static', filename='images/grassSolar.jpg') }}')">
+        <!-- Semi-transparent overlay for dull effect -->
+        <div class="absolute inset-0 bg-gray-800 opacity-60"></div>
+
+        <div class="container mx-auto text-center relative z-10 w-2/3">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">Addressing the Problem</h2>
+
+            <!-- Problem Statement -->
+            <div class="mb-12">
+                <p class="text-gray-200 font-semibold">
+                    In today's world, carbon emissions contribute significantly to environmental challenges,
+                    leading to climate change and ecological disruptions. The impact of our carbon footprint is
+                    undeniable, affecting communities and ecosystems globally.
+                </p>
+            </div>
+
+            <!-- Your Solution -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold text-white mb-4">Our Sustainable Solution</h3>
+                <p class="text-gray-200">
+                    At EnviroOffset Tech, we are committed to providing sustainable solutions to offset your carbon
+                    footprint.
+                    Through cutting-edge technologies and eco-friendly practices, we empower individuals and businesses
+                    to make a positive impact on the environment.
+                </p>
+            </div>
+
+            <!-- Call to Action -->
+            <div>
+                <p class="text-gray-200 mb-4">
+                    Ready to take the first step towards a greener future?
+                </p>
+                <a href="/products"
+                    class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-indigo-600 transition">Explore Our
+                    Products</a>
+            </div>
+        </div>
+    </section>
+    <!-- Climate information Section -->
+    <section class="h-screen flex flex-col justify-center bg-cover bg-center relative"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">
+        <div class="container mx-auto flex flex-col md:flex-row items-center h-1/2">
+            <div class="card w-1/2 bg-base-100 ">
+                <div class="card-body bg-white rounded-xl shadow-2xl border-gray-200 border-2 pr-5">
+                    <h2 class="text-3xl font-bold mb-4">
+                        Understand Global Emissions Trends
+                    </h2>
+                    <p class="text-gray-700">
+                        Explore the historical growth of global emissions from the mid-18th century to the present day.
+                        Our interactive chart provides insights into the changing landscape of carbon emissions,
+                        highlighting key milestones and trends over time.
+                    </p>
+                    <div class="card-actions justify-end">
+                        <a target="_blank"
+                            href="https://ourworldindata.org/grapher/annual-co2-emissions-per-country?country=~OWID_WRL">
+                            <button class="btn btn-primary">Explore Data</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 bg-white rounded-lg shadow-xl">
+                <img src="{{url_for('static', filename='images/graph.png')}}" alt="Global Emissions Chart"
+                    class="w-full h-full object-cover rounded-lg opacity-80">
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

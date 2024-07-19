@@ -1,0 +1,11 @@
+flask
+flask-session
+flask-sqlalchemy
+flask-bcrypt
+reportlab
+paypalrestsdk
+stripe>=5.0.0
+regex
+matplotlib
+pytest
+numpy

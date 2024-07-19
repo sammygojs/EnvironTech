@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnviroOffset Tech</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+        body {
+            font-family: Poppins;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .blur-bg {
+            background-color: rgba(244, 239, 239, 0.438);
+            /* Adjust background opacity as needed */
+            backdrop-filter: blur(10px);
+            /* Blur the content behind the div */
+            -webkit-backdrop-filter: blur(10px);
+            /* For Safari compatibility */
+        }
+    </style>
+
+</head>
+
+<body class="bg-cover bg-fixed bg-center"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">
+    {% include 'header.html' %}
+    <!-- How It Works Section -->
+    <section class="text-white px-16 py-16 h-fit">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8">How It Works</h2>
+
+            <!-- Step 1: Selection -->
+            <div class="mb-12 md:h-screen/3 flex flex-col md:flex-row items-center rounded-2xl py-8 blur-bg">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <img src="{{ url_for('static', filename='images/grassSolar.jpg') }}" alt="Selection Icon"
+                        class="w-full h-auto max-w-xs mx-auto mb-4">
+                </div>
+                <div class="md:w-1/2 px-6 text-center  ">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Selection</h3>
+                    <p class="font-semibold">
+                        Explore our range of high-quality solar panels. Choose the one that best fits your energy needs,
+                        whether for residential or commercial use. Our expert team is available to assist you in making
+                        the right selection.
+                    </p>
+                </div>
+
+                <!-- <a href="#Products"
+                class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition mt-4">Explore
+                Products</a> -->
+            </div>
+
+            <!-- Step 2: Installation -->
+            <div class="mb-12 flex flex-col md:flex-row-reverse items-center rounded-2xl py-8 blur-bg">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <img src="{{ url_for('static', filename='images/solarInstallation.jpg') }}" alt="Installation Icon"
+                        class="w-full h-auto max-w-xs mx-auto mb-4">
+                </div>
+                <div class="md:w-1/2 px-6 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Step 2: Installation</h3>
+                    <p class="font-semibold">
+                        Once you've selected your solar panels, our professional installation team will schedule a
+                        convenient time for installation. They will handle the entire installation process, ensuring
+                        optimal
+                        placement and functionality of your solar energy system.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 3: Maintenance -->
+            <div class="flex flex-col md:flex-row items-center rounded-2xl py-8 blur-bg">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <img src="{{ url_for('static', filename='images/solarCleaning.jpg') }}" alt="Maintenance Icon"
+                        class="w-full h-auto max-w-xs mx-auto mb-4">
+                </div>
+                <div class="md:w-1/2 px-6 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Step 3: Maintenance</h3>
+                    <p class="font-semibold">
+                        Enjoy hassle-free maintenance with our comprehensive service plans. Regular check-ups and
+                        proactive
+                        maintenance will keep your solar panels operating at peak performance, maximizing energy
+                        efficiency
+                        and longevity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

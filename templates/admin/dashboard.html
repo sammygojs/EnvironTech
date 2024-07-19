@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}">
+    <title>Admin Dashboard</title>
+
+
+</head>
+
+<body class="text-gray-800 font-inter bg-cover bg-fixed bg-center"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">
+    {% include 'admin/navbar.html' %}
+
+    <main class="md:mt-16 min-h-screen transition-all main">
+
+
+        {% set adminlen = admins|length %}
+        {% set stafflen = staffs|length %}
+        {% set userlen = users|length %}
+        {% set total = adminlen + stafflen + userlen %}
+        <!-- Content -->
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+                    <div class="flex justify-between mb-6">
+                        <div>
+                            {% if users %}
+                            <div class="flex items-center mb-1">
+                                <div class="text-2xl font-semibold">{{ userlen }}</div>
+                            </div>
+                            {% else %}
+                            <div class="flex items-center mb-1">
+                                <div class="text-2xl font-semibold">Mock data</div>
+                            </div>
+                            {% endif %}
+                            <div class="text-sm font-medium text-gray-400">Users</div>
+                        </div>
+                    </div>
+
+                    <a href="/admin/allUsers" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+                </div>
+                <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+                    <div class="flex justify-between mb-4">
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <div class="text-2xl font-semibold">{{ stafflen }}</div>
+                                <!-- <div class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">Mock percentage</div> -->
+                            </div>
+                            <div class="text-sm font-medium text-gray-400">Staff</div>
+                        </div>
+
+                    </div>
+                    <a href="/admin/allStaff" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+                </div>
+                <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+                    <div class="flex justify-between mb-6">
+                        <div>
+                            <div class="text-2xl font-semibold mb-1">{{ adminlen }}</div>
+                            <div class="text-sm font-medium text-gray-400">Admin</div>
+                        </div>
+
+                    </div>
+                    <a href="/admin/allAdmin" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div
+                    class="p-6 relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-lg rounded">
+                    <div class="rounded-t mb-0 px-0 border-0">
+                        <div class="flex flex-wrap items-center px-4 py-2">
+                            <div class="relative w-full max-w-full flex-grow flex-1">
+                                <h3 class="font-semibold text-base text-gray-900">SYSTEM AT A GLANCE
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="block w-full overflow-x-auto">
+                            <table class="items-center w-full bg-transparent border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-4 bg-gray-100 text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Role</th>
+                                        <th
+                                            class="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Count</th>
+                                        <th
+                                            class="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-gray-700">
+                                        <th
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                            Users</th>
+                                        <td
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            {{userlen}}</td>
+                                        <td
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            <div class="flex items-center">
+                                                <span class="mr-2">{{ ((userlen / total) * 100) | int }}%</span>
+                                                <div class="relative w-full">
+                                                    <div class="overflow-hidden h-2 text-xs flex rounded bg-green-200">
+                                                        <div style="width: {{ ((userlen / total) * 100) | int }}%"
+                                                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-600">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700 ">
+                                        <th
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                            Staff</th>
+                                        <td
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            {{ stafflen }}</td>
+                                        <td
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            <div class="flex items-center">
+                                                <span class="mr-2">{{ ((stafflen / total) * 100) | int }}%</span>
+                                                <div class="relative w-full">
+                                                    <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+                                                        <div style="width: {{ ((stafflen / total) * 100) | int }}%"
+                                                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-gray-700">
+                                        <th
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                            Admin</th>
+                                        <td
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            {{ adminlen }}</td>
+                                        <td
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            <div class="flex items-center">
+                                                <span class="mr-2">{{ ((adminlen / total) * 100) | int }}%</span>
+                                                <div class="relative w-full">
+                                                    <div class="overflow-hidden h-2 text-xs flex rounded bg-pink-200">
+                                                        <div style="width: {{ ((adminlen / total) * 100) | int }}%"
+                                                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </main>
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // start: Popper
+        const popperInstance = {}
+        document.querySelectorAll('.dropdown').forEach(function (item, index) {
+            const popperId = 'popper-' + index
+            const toggle = item.querySelector('.dropdown-toggle')
+            const menu = item.querySelector('.dropdown-menu')
+            menu.dataset.popperId = popperId
+            popperInstance[popperId] = Popper.createPopper(toggle, menu, {
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 8],
+                        },
+                    },
+                    {
+                        name: 'preventOverflow',
+                        options: {
+                            padding: 24,
+                        },
+                    },
+                ],
+                placement: 'bottom-end'
+            });
+        })
+        document.addEventListener('click', function (e) {
+            const toggle = e.target.closest('.dropdown-toggle')
+            const menu = e.target.closest('.dropdown-menu')
+            if (toggle) {
+                const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu')
+                const popperId = menuEl.dataset.popperId
+                if (menuEl.classList.contains('hidden')) {
+                    hideDropdown()
+                    menuEl.classList.remove('hidden')
+                    showPopper(popperId)
+                } else {
+                    menuEl.classList.add('hidden')
+                    hidePopper(popperId)
+                }
+            } else if (!menu) {
+                hideDropdown()
+            }
+        })
+
+        function hideDropdown() {
+            document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+                item.classList.add('hidden')
+            })
+        }
+        function showPopper(popperId) {
+            popperInstance[popperId].setOptions(function (options) {
+                return {
+                    ...options,
+                    modifiers: [
+                        ...options.modifiers,
+                        { name: 'eventListeners', enabled: true },
+                    ],
+                }
+            });
+            popperInstance[popperId].update();
+        }
+        function hidePopper(popperId) {
+            popperInstance[popperId].setOptions(function (options) {
+                return {
+                    ...options,
+                    modifiers: [
+                        ...options.modifiers,
+                        { name: 'eventListeners', enabled: false },
+                    ],
+                }
+            });
+        }
+        // end: Popper
+
+
+
+        // start: Tab
+        document.querySelectorAll('[data-tab]').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                e.preventDefault()
+                const tab = item.dataset.tab
+                const page = item.dataset.tabPage
+                const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
+                document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function (i) {
+                    i.classList.remove('active')
+                })
+                document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function (i) {
+                    i.classList.add('hidden')
+                })
+                item.classList.add('active')
+                target.classList.remove('hidden')
+            })
+        })
+        // end: Tab
+
+
+
+        // start: Chart
+        new Chart(document.getElementById('order-chart'), {
+            type: 'line',
+            data: {
+                labels: generateNDays(7),
+                datasets: [
+                    {
+                        label: 'Active',
+                        data: generateRandomData(7),
+                        borderWidth: 1,
+                        fill: true,
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgb(59 130 246 / .05)',
+                        tension: .2
+                    },
+                    {
+                        label: 'Completed',
+                        data: generateRandomData(7),
+                        borderWidth: 1,
+                        fill: true,
+                        pointBackgroundColor: 'rgb(16, 185, 129)',
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgb(16 185 129 / .05)',
+                        tension: .2
+                    },
+                    {
+                        label: 'Canceled',
+                        data: generateRandomData(7),
+                        borderWidth: 1,
+                        fill: true,
+                        pointBackgroundColor: 'rgb(244, 63, 94)',
+                        borderColor: 'rgb(244, 63, 94)',
+                        backgroundColor: 'rgb(244 63 94 / .05)',
+                        tension: .2
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function generateNDays(n) {
+            const data = []
+            for (let i = 0; i < n; i++) {
+                const date = new Date()
+                date.setDate(date.getDate() - i)
+                data.push(date.toLocaleString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                }))
+            }
+            return data
+        }
+        function generateRandomData(n) {
+            const data = []
+            for (let i = 0; i < n; i++) {
+                data.push(Math.round(Math.random() * 10))
+            }
+            return data
+        }
+        // end: Chart
+
+
+    </script>
+
+</body>
+
+</html>

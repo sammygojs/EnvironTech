@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="project/static/styles/userLoginStyles.css">
+</head>
+<body class="bg-gray-200">
+    <section class="section">
+        <div class="div-container">
+            <div class="div-form">
+                <h1 class="h1">User Login</h1>
+                    <form action="" method="POST">
+                    <div class="input-group">
+                        <label for="email" class="label">Enter your Username</label>
+                        <input type="email" name="email" id="email" placeholder="name" class="input" required="">
+                    </div>
+                    <div class="input-group">
+                        <label for="password" class="label">Enter your Password</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="input" required="">
+                    </div>
+                    <button type="submit" class="button">Login</button>
+                    <button type="button" class="guest-button" onclick="location.href='/path-for-guest-login';">Guest Login</button>
+                    </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

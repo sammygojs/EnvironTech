@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnviroOffset Tech</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* White with 80% opacity */
+            backdrop-filter: blur(10px);
+        }
+
+        body {
+            font-family: Poppins;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 font-inter bg-cover bg-center items-center px-5 pb-5" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ url_for('static', filename='images/SolarPanels.jpg') }}')">">
+
+    {% include 'header.html' %}
+    <main class="w-full md:mt-24 min-h-screen transition-all main">
+    <!-- FAQ Section -->
+    <!-- <section class=" flex flex-col justify-center bg-cover p-5"> -->
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-white mt-10 text-center">Frequently Asked Questions</h2>
+
+            <!-- FAQ Items -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">How do solar panels work?</h3>
+                    <p class="text-gray-700">Solar panels work by converting sunlight into electricity using
+                        photovoltaic cells. These cells generate direct current (DC) electricity, which is then
+                        converted into usable alternating current (AC) electricity for your home or business.</p>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">What is the lifespan of solar panels?</h3>
+                    <p class="text-gray-700">The average lifespan of solar panels is around 25-30 years. However, many
+                        solar panels continue to produce electricity beyond their warranty period. Regular maintenance
+                        and proper installation contribute to the longevity of solar panels.</p>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">How can I estimate my energy savings?</h3>
+                    <p class="text-gray-700">You can estimate your energy savings by considering factors such as your
+                        location, the size of the solar installation, and your energy consumption. Our experts can
+                        provide a personalized estimate based on your specific circumstances.</p>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Are there government incentives for installing solar panels?
+                    </h3>
+                    <p class="text-gray-700">Yes, many governments offer incentives for installing solar panels, such as
+                        tax credits, rebates, and feed-in tariffs. These incentives can significantly reduce the overall
+                        cost of your solar installation. Check with local authorities for available programs.</p>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">What maintenance is required for solar panels?</h3>
+                    <p class="text-gray-700">Solar panels generally require minimal maintenance. Regular cleaning to
+                        remove dirt and debris, as well as occasional inspections for any damage, is recommended. Our
+                        team can guide you on proper maintenance practices to ensure optimal performance.</p>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Can solar panels work in cloudy weather?</h3>
+                    <p class="text-gray-700">Yes, solar panels can still generate electricity in cloudy weather. While
+                        they are most effective in direct sunlight, modern solar technologies are designed to capture
+                        diffuse sunlight on cloudy days. However, the energy output may be lower compared to sunny days.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    <!-- </section> -->
+</main>
+</body>
+<script src=" https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</html>
